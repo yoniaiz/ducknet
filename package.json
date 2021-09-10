@@ -5,15 +5,45 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "test": "is-ci \"test:coverage\" \"test:watch\"",
+    "test:watch": "jest --watch",
+    "test:coverage": "npm run test:coverage:client && npm run test:coverage:server",
+    "test:coverage:client": "jest --config test/jest.client.js --coverage",
+    "test:coverage:server": "jest --config test/jest.server.js --coverage",
+    "test:watch:client": "jest --config test/jest.client.js --watch",
+    "test:watch:server": "jest --config test/jest.server.js --watch",
+    "test:debug:client": "node --inspect-brk ./node_modules/jest/bin/jest.js --config test/jest.client.js --runInBand --watch",
+    "test:debug:server": "node --inspect-brk ./node_modules/jest/bin/jest.js --config test/jest.server.js --runInBand --watch",
+    "cypress": "cypress open"
   },
   "dependencies": {
+    "axios": "^0.21.4",
+    "bcrypt": "^5.0.1",
+    "mongodb": "^4.1.1",
+    "mongoose": "^6.0.5",
     "next": "11.1.2",
+    "next-auth": "^3.29.0",
+    "next-connect": "^0.10.2",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "styled-components": "^5.3.1"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^12.0.0",
+    "@types/bcrypt": "^5.0.0",
+    "@types/mongoose": "^5.11.97",
+    "@types/node": "^16.9.0",
     "@types/react": "17.0.20",
+    "babel-jest": "^27.1.1",
+    "cypress": "^8.3.1",
+    "env-cmd": "^10.1.0",
+    "identity-obj-proxy": "^3.0.0",
+    "is-ci-cli": "^2.2.0",
+    "jest": "^27.1.1",
+    "mongodb-memory-server": "^7.4.0",
+    "react-test-renderer": "^17.0.2",
     "typescript": "4.4.2"
   }
 }
