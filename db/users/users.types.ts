@@ -1,4 +1,4 @@
-import { Document, Model, Types } from "mongoose";
+import { Document, Model, Types } from 'mongoose';
 
 export interface User {
   firstName: string;
@@ -8,7 +8,7 @@ export interface User {
   projects?: Types.Array<string>;
 }
 
-export type PartialUser = Pick<User, "email" | "projects"> & {
+export type PartialUser = Pick<User, 'email' | 'projects'> & {
   fullName: string;
 };
 

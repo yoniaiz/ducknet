@@ -1,8 +1,8 @@
-import { Types, Schema } from "mongoose";
-import { UserDocument, UserModel } from "./users.types";
-import * as methods from "./users.methods";
-import * as statics from "./users.statics";
-import * as utils from "./users.utils";
+import { Types, Schema } from 'mongoose';
+import { UserDocument, UserModel } from './users.types';
+import * as methods from './users.methods';
+import * as statics from './users.statics';
+import * as utils from './users.utils';
 
 const UserSchema = new Schema<UserDocument, UserModel>({
   id: Types.ObjectId,
@@ -22,10 +22,10 @@ const UserSchema = new Schema<UserDocument, UserModel>({
 });
 
 // Pre
-UserSchema.pre<UserDocument>("save", utils.preUserChange);
+UserSchema.pre<UserDocument>('save', utils.preUserChange);
 
 // Virtuals
-UserSchema.virtual("fullName").get(utils.getUsername);
+UserSchema.virtual('fullName').get(utils.getUsername);
 
 // Methods
 UserSchema.methods.getUser = methods.getUser;

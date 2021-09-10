@@ -1,4 +1,4 @@
-import { UserBaseDocument } from "./users.types";
+import { UserBaseDocument } from './users.types';
 
 export function getUser(this: UserBaseDocument) {
   const fullName = this.fullName;

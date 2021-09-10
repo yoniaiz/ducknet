@@ -1,4 +1,4 @@
-import { Schema, model, Document, Model } from "mongoose";
+import { Schema, model, Document, Model } from 'mongoose';
 
 export interface TestUser {
   name: string;
@@ -14,5 +14,5 @@ const UserSchema = new Schema<TestUserDoc, UserDoc>({
   postCount: Number,
 });
 
-const User = model<TestUserDoc, UserDoc>("user", UserSchema);
+const User = model<TestUserDoc, UserDoc>('user', UserSchema);
 export default User;
