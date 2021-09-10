@@ -1,0 +1,46 @@
+{
+  "extends": [
+    "next/core-web-vitals",
+    "next",
+    "eslint-config-next",
+    "eslint:recommended",
+    "plugin:react/recommended"
+  ],
+  "rules": {
+    "no-undef": "off",
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-filename-extension": [
+      1,
+      { "extensions": [".js", ".jsx", ".tsx", ".ts"] }
+    ],
+    "react/prop-types": "off",
+    "import/prefer-default-export": "off",
+    "import/extensions": "off",
+    "import/order": "off",
+    "import/no-named-as-default-member": "error",
+    "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
+    "max-len": [
+      "warn",
+      {
+        "code": 100,
+        "tabWidth": 2,
+        "ignoreStrings": true,
+        "ignoreUrls": true,
+        "ignoreTemplateLiterals": true,
+        "ignoreComments": true
+      }
+    ],
+    "no-restricted-imports": [
+      "error",
+      {
+        "paths": [
+          {
+            "name": "styled-components",
+            "message": "Please import from styled-components/macro."
+          }
+        ],
+        "patterns": ["!styled-components/macro"]
+      }
+    ]
+  }
+}

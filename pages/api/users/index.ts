@@ -1,7 +1,7 @@
 import nc from "next-connect";
 import UserModel from "db/users/users.model";
 import { PartialUser } from "db/users/users.types";
-import type { NextApiRequest, NextApiResponse } from "next";
+import type { NextApiResponse } from "next";
 import { connectMongoDb } from "lib/connectMongoDb";
 
 type HandlerResponse = { users: PartialUser[] } | { message: string };
