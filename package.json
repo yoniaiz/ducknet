@@ -26,6 +26,7 @@
     "cypress": "cypress open",
     "lint": "next lint",
     "format": "prettier --write \"./**/*.{js,ts,tsx}\" --loglevel silent",
+    "types-check": "tsc",
     "lint-staged": "lint-staged",
     "prepare": "husky install"
   },
