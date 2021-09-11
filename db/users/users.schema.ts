@@ -9,6 +9,9 @@ const UserSchema = new Schema<UserDocument, UserModel>({
   firstName: {
     type: String,
     required: true,
+    validate: {
+      validator: (name: string) => name?.length > 2,
+    },
   },
   lastName: String,
   password: {
