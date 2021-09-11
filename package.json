@@ -31,6 +31,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@material-ui/core": "^4.12.3",
     "axios": "^0.21.4",
     "bcrypt": "^5.0.1",
     "mongodb": "^4.1.1",
@@ -40,7 +41,8 @@
     "next-connect": "^0.10.2",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "styled-components": "^5.3.1"
+    "styled-components": "^5.3.1",
+    "styled-normalize": "^8.0.7"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.14.1",
@@ -48,9 +50,11 @@
     "@types/bcrypt": "^5.0.0",
     "@types/node": "^16.9.0",
     "@types/react": "17.0.20",
+    "@types/styled-components": "^5.1.14",
     "@typescript-eslint/eslint-plugin": "^4.31.0",
     "@typescript-eslint/parser": "^4.31.0",
     "babel-jest": "^27.1.1",
+    "babel-plugin-styled-components": "^1.13.2",
     "cypress": "^8.3.1",
     "eslint": "7.32.0",
     "eslint-config-next": "11.1.2",
