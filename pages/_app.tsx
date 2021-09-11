@@ -2,6 +2,7 @@ import { ThemeProvider } from 'styled-components';
 import type { AppProps } from 'next/app';
 import { Normalize } from 'styled-normalize';
 import { theme, GlobalStyle } from '@style';
+import Layout from '@components/layout';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -9,7 +10,9 @@ function MyApp({ Component, pageProps }: AppProps) {
       <GlobalStyle />
       <Normalize />
       <ThemeProvider theme={theme}>
-        <Component {...pageProps} />
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
       </ThemeProvider>
     </>
   );
