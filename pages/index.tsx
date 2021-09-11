@@ -3,14 +3,14 @@ import Head from 'next/head';
 import Button from '@ui/button';
 
 export default function Home() {
-      const send = async () => {
-        try {
-          const { data } = await axios.get('/api/users');
-          console.log(data);
-        } catch (e) {
-          console.log(e);
-        }
-      };
+  const send = async () => {
+    try {
+      const { data } = await axios.get('/api/users');
+      console.log(data);
+    } catch (e) {
+      console.log(e);
+    }
+  };
   return (
     <div>
       <Head>
