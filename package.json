@@ -2,6 +2,14 @@
   "name": "ducknet",
   "version": "0.1.0",
   "private": true,
+  "lint-staged": {
+    "./**/*.+(ts|tsx)": [
+      "eslint"
+    ],
+    "./**/*.+(ts|tsx|json|js|css|scss)": [
+      "prettier --write"
+    ]
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -17,7 +25,9 @@
     "test:debug:server": "node --inspect-brk ./node_modules/jest/bin/jest.js --config test/jest.server.js --runInBand --watch",
     "cypress": "cypress open",
     "lint": "next lint",
-    "format": "prettier --write \"./**/*.{js,ts,tsx}\" --loglevel silent"
+    "format": "prettier --write \"./**/*.{js,ts,tsx}\" --loglevel silent",
+    "pre-commit":"lint-staged",
+    "prepare": "husky install"
   },
   "dependencies": {
     "axios": "^0.21.4",
@@ -42,9 +52,11 @@
     "cypress": "^8.3.1",
     "eslint": "7.32.0",
     "eslint-config-next": "11.1.2",
+    "husky": "^7.0.2",
     "identity-obj-proxy": "^3.0.0",
     "is-ci-cli": "^2.2.0",
     "jest": "^27.1.1",
+    "lint-staged": "^11.1.2",
     "prettier": "^2.4.0",
     "react-test-renderer": "^17.0.2",
     "typescript": "^4.4.2"
