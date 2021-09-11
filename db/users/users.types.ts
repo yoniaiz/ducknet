@@ -21,6 +21,4 @@ export interface UserDocument extends UserBaseDocument {}
 
 export interface UserPopulatedDocument extends UserBaseDocument {}
 
-export interface UserModel extends Model<UserDocument> {
-  findMyCompany(id: string): Promise<UserPopulatedDocument>;
-}
+export interface UserModel extends Model<UserDocument> {}

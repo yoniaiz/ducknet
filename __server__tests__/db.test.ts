@@ -1,5 +1,7 @@
 import User, { TestUserDoc } from '@utils/test-utils/user';
 import { connectMongoDb, closeConnection, clearCollections } from '@lib/connectMongoDb';
+import Project, { ProjectDoc } from '@utils/test-utils/project';
+import Comment, { CommentDoc } from '@utils/test-utils/comment';
 
 beforeAll(async () => await connectMongoDb());
 afterEach(async () => await clearCollections());
@@ -133,5 +135,98 @@ describe('sub docs', () => {
 
     const updatedUser = await User.findOne({ _id: user1._id });
     expect(updatedUser?.postCount).toEqual(0);
+  });
+});
+
+let project: ProjectDoc;
+
+describe('test associations', () => {
+  let comment: CommentDoc;
+
+  beforeEach(async () => {
+    project = new Project({ title: 'project title', content: 'this is the content' });
+    user = new User({ name: 'User1', projects: [project._id] });
+    comment = new Comment({ content: 'comment content', user: user._id });
+
+    comment.user = user;
+
+    if (project.comments && comment) {
+      project.comments = comment._id;
+    }
+
+    await Promise.all([user.save(), project.save(), comment.save()]);
+  });
+
+  it('user has project', async () => {
+    const createdUser = await User.findOne({ _id: user._id });
+    const userProjectId = Array.isArray(createdUser?.projects) ? createdUser?.projects[0]?._id : '';
+    const project = await Project.findOne({ _id: userProjectId });
+
+    if (createdUser) {
+      const comment = await Comment.findOne({ user: createdUser });
+      expect(comment?.content).toMatchInlineSnapshot(`"comment content"`);
+    }
+
+    expect(project?.title).toMatchInlineSnapshot(`"project title"`);
+  });
+
+  it('get user projects', async () => {
+    const createdProjects = await User.findOne({ _id: user._id }).populate('projects');
+    const firstProject = Array.isArray(createdProjects?.projects)
+      ? createdProjects?.projects[0]
+      : null;
+
+    expect(firstProject?.title).toMatchInlineSnapshot(`"project title"`);
+  });
+
+  it('get user projects messages', async () => {
+    const createdProjectsComments = await User.findOne({ _id: user._id }).populate({
+      path: 'projects',
+      populate: {
+        path: 'comments',
+        model: 'comment',
+        populate: {
+          path: 'user',
+          model: 'user',
+        },
+      },
+    });
+
+    // @ts-expect-error
+    expect(createdProjectsComments?.projects[0]?.comments[0]?.content).toMatchInlineSnapshot(
+      `"comment content"`
+    );
+  });
+});
+
+describe('middleware test', () => {
+  beforeEach(async () => {
+    project = new Project({ title: 'project title', content: 'this is the content' });
+    user = new User({ name: 'User1', projects: [project._id] });
+
+    await Promise.all([user.save(), project.save()]);
+  });
+
+  it('on remove user delete projects', async () => {
+    const preProjectsCount = await Project.count();
+    await user.remove();
+    const postProjectsCount = await Project.count();
+
+    expect(preProjectsCount).toEqual(1);
+    expect(postProjectsCount).toEqual(0);
+  });
+});
+
+describe.only('pagination', () => {
+  const createUserPromises = Array.from({ length: 4 }, (_, i) =>
+    new User({ name: `user ${i + 1}` }).save()
+  );
+  beforeEach(async () => {
+    await Promise.all(createUserPromises);
+  });
+  it('get all users', async () => {
+    const [user3, user4] = await User.find().sort({ name: 1 }).skip(2).limit(2);
+    expect(user3.name).toMatchInlineSnapshot(`"user 3"`);
+    expect(user4.name).toMatchInlineSnapshot(`"user 4"`);
   });
 });

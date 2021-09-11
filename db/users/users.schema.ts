@@ -24,7 +24,7 @@ const UserSchema = new Schema<UserDocument, UserModel>({
   },
 });
 
-// Pre
+// Pre middleware
 UserSchema.pre<UserDocument>('save', utils.preUserChange);
 
 // Virtuals

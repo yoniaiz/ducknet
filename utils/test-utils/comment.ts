@@ -1,13 +1,21 @@
-import { Schema, Document } from 'mongoose';
-
-export interface Post {
-  title: string;
+import { Schema, Document, PopulatedDoc, model, Model } from 'mongoose';
+import { TestUser } from './user';
+export interface Comment {
+  content: string;
+  user: PopulatedDoc<TestUser>;
 }
 
-export interface PostDoc extends Document, Post {}
+export interface CommentDoc extends Document, Comment {}
+export interface CommentModel extends Model<CommentDoc> {}
 
-const PostSchema = new Schema<PostDoc>({
-  title: String,
+const CommentSchema = new Schema<CommentDoc, CommentModel>({
+  content: String,
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: 'user',
+  },
 });
 
-export default PostSchema;
+const Comment = model<CommentDoc, CommentModel>('comment', CommentSchema);
+
+export default Comment;
