@@ -1,18 +1,28 @@
 import { Schema, model, Document, Model } from 'mongoose';
+import PostSchema, { PostDoc } from './post';
 
 export interface TestUser {
   name: string;
-  postCount: number;
+  likes: number;
+  posts: Partial<PostDoc>[];
 }
 
-export interface TestUserDoc extends Document, TestUser {}
+export interface TestUserDoc extends Document, TestUser {
+  postCount: () => number;
+}
 
-export interface UserDoc extends Model<TestUserDoc> {}
+export interface UserModel extends Model<TestUserDoc> {}
 
-const UserSchema = new Schema<TestUserDoc, UserDoc>({
+const UserSchema = new Schema<TestUserDoc, UserModel>({
   name: String,
-  postCount: Number,
+  likes: Number,
+  posts: [PostSchema],
 });
 
-const User = model<TestUserDoc, UserDoc>('user', UserSchema);
+UserSchema.virtual('postCount').get(function (this: TestUserDoc) {
+  return this.posts.length;
+});
+
+const User = model<TestUserDoc, UserModel>('user', UserSchema);
+
 export default User;

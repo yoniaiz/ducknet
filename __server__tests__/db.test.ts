@@ -7,7 +7,6 @@ afterAll(async () => await closeConnection());
 
 describe('Creating records', () => {
   it('saves a user', async () => {
-    console.log('HERE');
     const user1 = new User({ name: 'user1' });
 
     const result = await user1.save();
@@ -66,9 +65,9 @@ describe('Delete', () => {
   });
 });
 
-describe.only('update', () => {
+describe('update', () => {
   beforeEach(async () => {
-    const user1 = new User({ name: 'user1', postCount: 0 });
+    const user1 = new User({ name: 'user1', likes: 0 });
     user = await user1.save();
   });
 
@@ -90,9 +89,49 @@ describe.only('update', () => {
   });
 
   it('increment by one', async () => {
-    await User.updateMany({ name: 'user1' }, { $inc: { postCount: 1 } });
+    await User.updateMany({ name: 'user1' }, { $inc: { likes: 1 } });
 
     const user1 = await User.findOne({ _id: user._id });
-    expect(user1?.postCount).toEqual(1);
+    expect(user1?.likes).toEqual(1);
+  });
+});
+
+describe('sub docs', () => {
+  it('add sub doc', async () => {
+    const user1 = new User({ name: 'user1', posts: [{ title: 'post 1' }] });
+    await user1.save();
+
+    const createdUser = await User.findOne({ _id: user1._id });
+    expect(createdUser?.posts[0]?.title).toEqual('post 1');
+  });
+
+  it('add sub doc to existing user', async () => {
+    const user1 = new User({ name: 'user1', posts: [{ title: 'post 1' }] });
+    await user1.save();
+
+    const createdUser = await User.findOne({ _id: user1._id });
+
+    if (createdUser) {
+      createdUser.posts.push({ title: 'post 2' });
+      await createdUser.save();
+    }
+
+    const updatedUser = await User.findOne({ _id: user1._id });
+    expect(updatedUser?.postCount).toEqual(2);
+  });
+
+  it('remove sub doc to existing user', async () => {
+    const user1 = new User({ name: 'user1', posts: [{ title: 'post 1' }] });
+    await user1.save();
+
+    const createdUser = await User.findOne({ _id: user1._id });
+
+    if (createdUser && createdUser.posts?.[0]?.remove) {
+      createdUser.posts[0].remove();
+      await createdUser.save();
+    }
+
+    const updatedUser = await User.findOne({ _id: user1._id });
+    expect(updatedUser?.postCount).toEqual(0);
   });
 });

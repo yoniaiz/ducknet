@@ -1,18 +1,20 @@
 {
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
   "extends": [
     "next/core-web-vitals",
     "next",
     "eslint-config-next",
     "eslint:recommended",
-    "plugin:react/recommended"
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended"
   ],
   "rules": {
     "no-undef": "off",
+    "no-unused-vars": ["error", { "argsIgnorePattern": "this" }],
     "react/react-in-jsx-scope": "off",
-    "react/jsx-filename-extension": [
-      1,
-      { "extensions": [".js", ".jsx", ".tsx", ".ts"] }
-    ],
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".tsx", ".ts"] }],
     "react/prop-types": "off",
     "import/prefer-default-export": "off",
     "import/extensions": "off",
@@ -41,6 +43,15 @@
         ],
         "patterns": ["!styled-components/macro"]
       }
-    ]
+    ],
+    "@typescript-eslint/no-explicit-any": [
+      "error",
+      {
+        "ignoreRestArgs": true
+      }
+    ],
+    "@typescript-eslint/no-empty-interface": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/ban-ts-comment": "off"
   }
 }
