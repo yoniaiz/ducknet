@@ -28,7 +28,8 @@
       "@style": ["style"],
       "@style/*": ["style/*"],
       "@types": ["types"],
-      "@types/*": ["types/*"]
+      "@types/*": ["types/*"],
+      "@assets/*": ["public/assets/*"]
     }
   },
   "include": [

@@ -1,8 +1,17 @@
 import styled from 'styled-components';
+import AppBar from '@material-ui/core/AppBar';
+import MuiToolbar from '@material-ui/core/Toolbar';
 
-export const Header = styled.header`
-  width: 100%;
-  height: 6.4rem;
+export const Header = styled(AppBar)`
   background-color: ${({ theme }) => theme.colors.white1};
-  box-shadow: ${({ theme }) => theme.shadows.shadow2};
+`;
+
+export const Toolbar = styled(MuiToolbar)`
+  padding-left: 0;
+`;
+
+export const Nav = styled.nav`
+  flex: 1;
+  display: flex;
+  justify-content: center;
 `;

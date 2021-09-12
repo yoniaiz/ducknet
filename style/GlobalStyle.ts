@@ -7,6 +7,10 @@ export const GlobalStyle = createGlobalStyle`
     background-color: ${({ theme }) => theme.colors.white2};
  }
 
+ body {
+   font-size: 1.6rem;
+ }
+
   *,
   *::before,
   *::after {

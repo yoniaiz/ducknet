@@ -8,7 +8,7 @@ const Layout: React.FC = ({ children }) => {
       <TopBar />
       <S.Container>
         <SideBar />
-        <main>{children}</main>
+        <S.Main>{children}</S.Main>
       </S.Container>
     </>
   );
