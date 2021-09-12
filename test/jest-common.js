@@ -21,6 +21,7 @@ module.exports = {
     '^@lib/(.*)$': '<rootDir>/lib/$1',
     '^@pages/(.*)$': '<rootDir>/pages/$1',
     '^@ui/(.*)$': '<rootDir>/components/ui/$1',
+    '^@style/(.*)$': '<rootDir>/style/$1',
   },
   testPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/.next/'],
   transform: {

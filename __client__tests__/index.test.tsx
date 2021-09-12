@@ -1,12 +1,14 @@
-import { render, screen } from '@testing-library/react';
+import { render, RenderOptions } from '@testing-library/react';
 import Home from '@pages/index';
+import { ThemeProvider } from 'styled-components';
+import { theme } from '@style/theme';
+
+const renderWithStyledComponents = (children: React.ReactNode, options?: RenderOptions) => {
+  return render(<ThemeProvider theme={theme}>{children}</ThemeProvider>, options);
+};
 
 describe('Home', () => {
   it('renders a heading', () => {
-    render(<Home />);
-
-    const main = screen.getByText(/main/i);
-
-    expect(main).toBeInTheDocument();
+    renderWithStyledComponents(<Home />);
   });
 });
