@@ -10,11 +10,6 @@ export const CreateProjectBtn = styled(Button)`
 export const IconBtn = styled(IconButton)`
   padding: 0.4rem;
   color: ${({ theme }) => theme.colors.black};
-
-  svg {
-    height: 4rem;
-    width: 4rem;
-  }
 `;
 
 export const MenuItem = styled(MuiMenuItem)`
@@ -23,8 +18,4 @@ export const MenuItem = styled(MuiMenuItem)`
 
 export const NotificationIconBtn = styled(IconBtn)`
   border: 1px solid ${({ theme }) => theme.colors.black};
-  svg {
-    height: 2rem;
-    width: 2rem;
-  }
 `;

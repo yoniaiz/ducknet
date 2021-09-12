@@ -26,7 +26,7 @@ const Actions = () => {
           onClick={() => console.log('notifications')}
           color="inherit"
         >
-          <NotificationIcon />
+          <NotificationIcon size={'2rem'} />
         </S.NotificationIconBtn>
       </Tooltip>
       <S.CreateProjectBtn color="primary">Create project</S.CreateProjectBtn>
@@ -37,7 +37,7 @@ const Actions = () => {
         onClick={handleMenu}
         color="inherit"
       >
-        <UserCircleIcon />
+        <UserCircleIcon size={'4rem'} />
       </S.IconBtn>
       <Menu
         id="menu-appbar"

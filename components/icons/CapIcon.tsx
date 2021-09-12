@@ -1,8 +1,12 @@
-export const CapIcon = () => (
+import { IconProps } from './icons.types';
+
+export const CapIcon = ({ size }: IconProps) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     className="h-6 w-6"
     fill="none"
+    width={size}
+    height={size}
     viewBox="0 0 24 24"
     stroke="currentColor"
   >

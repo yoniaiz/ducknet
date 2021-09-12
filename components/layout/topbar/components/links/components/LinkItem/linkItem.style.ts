@@ -16,8 +16,6 @@ export const LinkItemContainer = styled.div<{ selected: boolean }>`
   width: 33.33%;
 
   svg {
-    width: 3.2rem;
-    height: 3.2rem;
     color: ${({ theme, selected }) => (selected ? theme.colors.purple2 : theme.colors.black)};
     transition: 0.5s ease color;
   }

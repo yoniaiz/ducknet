@@ -12,7 +12,7 @@ export const Links = () => {
   return (
     <S.LinksContainer>
       {LINKS.map(({ Icon, path }) => (
-        <LinkItem Icon={<Icon />} link={path} key={path} />
+        <LinkItem Icon={<Icon size={'3.2rem'} />} link={path} key={path} />
       ))}
     </S.LinksContainer>
   );
