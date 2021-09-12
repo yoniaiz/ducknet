@@ -7,9 +7,17 @@ export const GlobalStyle = createGlobalStyle`
     background-color: ${({ theme }) => theme.colors.white2};
  }
 
+ body {
+   font-size: 1.6rem;
+ }
+
   *,
   *::before,
   *::after {
     box-sizing: border-box;
+  }
+
+  .MuiTooltip-tooltip {
+    font-size: 1.4rem;
   }
 `;
