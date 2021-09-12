@@ -1,59 +1,75 @@
-import styled, { css, DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
-import MaterialUiButton from '@material-ui/core/Button';
+import styled, { css, DefaultTheme } from 'styled-components';
+import MaterialUiButton, { ButtonProps } from '@material-ui/core/Button';
 
-const contained = css`
-  ${({ theme: { colors, gradients } }) => css`
-    &.MuiButton-containedPrimary {
-      background: ${gradients.blueRtl};
-    }
+const getBtnStyle = (
+  variant: ButtonProps['variant'] = 'contained',
+  color: ButtonProps['color'] = 'primary',
+  theme: DefaultTheme
+) => {
+  const contained = {
+    primary: css`
+      background: ${theme.gradients.purpleRtl};
+    `,
+    secondary: css`
+      background: ${theme.gradients.blueRtl};
+    `,
+    inherit: css``,
+    default: css``,
+  };
 
-    &.MuiButton-containedSecondary {
-      background: ${gradients.purpleRtl};
-    }
+  const outlined = {
+    primary: css`
+      border-color: ${theme.colors.purple1};
+      color: ${theme.colors.purple1};
 
-    &.Mui-disabled {
-      opacity: 0.7;
-      background: ${colors.grey1};
-    }
-  `}
-`;
-
-const outlined = css`
-  ${({ theme: { colors } }) => css`
-    &.MuiButton-outlinedPrimary {
-      border: 1px solid ${colors.blue2};
-      color: ${colors.blue2};
-    }
-
-    &.MuiButton-outlinedSecondary {
       &:hover {
         background-color: rgba(54, 41, 135, 0.04);
-        border: 1px solid ${colors.purple2};
+        border: 1px solid ${theme.colors.purple1};
       }
-      border: 1px solid ${colors.purple1};
-      color: ${colors.purple1};
-    }
-  `}
-`;
+    `,
+    secondary: css`
+      border-color: ${theme.colors.blue2};
+      color: ${theme.colors.blue2};
 
-const variantStyles: Record<string, FlattenInterpolation<ThemeProps<DefaultTheme>>> = {
-  contained,
-  outlined,
+      &:hover {
+        background-color: rgba(54, 41, 135, 0.04);
+        border: 1px solid ${theme.colors.blue2};
+      }
+    `,
+    inherit: css``,
+    default: css``,
+  };
+
+  const text = {
+    primary: css``,
+    secondary: css``,
+    inherit: css``,
+    default: css``,
+  };
+
+  const btnStyles = { contained, outlined, text };
+
+  return btnStyles[variant][color];
 };
 
 export const Button = styled(MaterialUiButton)`
-  ${({ variant = 'contained', theme, size = 'small' }) => css`
-    ${variantStyles[variant]}
+  ${({ variant = 'contained', color, theme, size = 'small' }) => css`
+    ${getBtnStyle(variant, color, theme)}
 
-    &.MuiButton-root {
-      padding: ${`0.${variant === 'contained' ? 7 : 6}rem 1.6rem`};
-      font-size: ${theme.fontSizes[size]};
-      font-family: 'Heebo', sans-serif;
-      font-weight: 400;
-      line-height: unset;
-      letter-spacing: unset;
-      text-transform: unset;
-      border-radius: 1.6rem;
-    }
+    padding: ${variant === 'contained' ? '0.7rem 1.6rem' : '0.6rem 1.5rem'};
+    font-size: ${theme.fontSizes[size]};
+    font-family: 'Heebo', sans-serif;
+    font-weight: 400;
+    line-height: unset;
+    letter-spacing: unset;
+    text-transform: unset;
+    border-radius: 1.6rem;
+
+    ${variant === 'contained' &&
+    css`
+      :disabled {
+        background: ${theme.colors.grey1};
+      }
+    `}
   `}
 `;

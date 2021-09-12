@@ -16,6 +16,21 @@ export default function Home() {
         <Button color="primary" variant="contained">
           my button
         </Button>
+        <Button color="secondary" variant="contained">
+          my button
+        </Button>
+        <Button color="secondary" variant="outlined">
+          my button
+        </Button>
+        <Button color="primary" variant="outlined">
+          my button
+        </Button>
+        <Button disabled color="primary" variant="outlined">
+          my button
+        </Button>
+        <Button disabled color="primary" variant="contained">
+          my button
+        </Button>
       </main>
     </div>
   );
