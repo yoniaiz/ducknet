@@ -8,9 +8,9 @@ import Layout from '@components/layout';
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <StylesProvider injectFirst>
-      <GlobalStyle />
-      <Normalize />
       <ThemeProvider theme={theme}>
+        <GlobalStyle />
+        <Normalize />
         <Layout>
           <Component {...pageProps} />
         </Layout>

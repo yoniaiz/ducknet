@@ -4,7 +4,7 @@ export const GlobalStyle = createGlobalStyle`
   html { 
     font-size: 62.5%;
     font-family: 'Heebo', sans-serif;
-    background-color: #EBEBEB;
+    background-color: ${({ theme }) => theme.colors.white2};
  }
 
   *,
