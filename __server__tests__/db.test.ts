@@ -12,7 +12,6 @@ describe('Creating records', () => {
     const user1 = new User({ name: 'user1' });
 
     const result = await user1.save();
-
     expect(result.isNew).toEqual(false);
   });
 });
@@ -217,11 +216,11 @@ describe('middleware test', () => {
   });
 });
 
-describe.only('pagination', () => {
-  const createUserPromises = Array.from({ length: 4 }, (_, i) =>
-    new User({ name: `user ${i + 1}` }).save()
-  );
+describe('pagination', () => {
   beforeEach(async () => {
+    const createUserPromises = Array.from({ length: 4 }, (_, i) =>
+      new User({ name: `user ${i + 1}` }).save()
+    );
     await Promise.all(createUserPromises);
   });
   it('get all users', async () => {
