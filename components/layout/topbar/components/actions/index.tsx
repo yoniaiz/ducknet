@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import Menu from '@material-ui/core/Menu';
 import * as S from './actions.style';
+import { UserCircleIcon, NotificationIcon } from '@icons';
+import Tooltip from '@material-ui/core/Tooltip';
 
 const Actions = () => {
   const [anchorEl, setAnchorEl] = useState<(EventTarget & HTMLButtonElement) | null>(null);
@@ -16,15 +18,17 @@ const Actions = () => {
 
   return (
     <div>
-      <S.NotificationIconBtn
-        aria-label="notifications"
-        aria-controls="menu-appbar"
-        aria-haspopup="true"
-        onClick={() => console.log('notifications')}
-        color="inherit"
-      >
-        <S.NotificationIcon />
-      </S.NotificationIconBtn>
+      <Tooltip title="Notifications">
+        <S.NotificationIconBtn
+          aria-label="notifications"
+          aria-controls="menu-appbar"
+          aria-haspopup="true"
+          onClick={() => console.log('notifications')}
+          color="inherit"
+        >
+          <NotificationIcon />
+        </S.NotificationIconBtn>
+      </Tooltip>
       <S.CreateProjectBtn color="primary">Create project</S.CreateProjectBtn>
       <S.IconBtn
         aria-label="account of current user"
@@ -33,7 +37,7 @@ const Actions = () => {
         onClick={handleMenu}
         color="inherit"
       >
-        <S.Avatar />
+        <UserCircleIcon />
       </S.IconBtn>
       <Menu
         id="menu-appbar"

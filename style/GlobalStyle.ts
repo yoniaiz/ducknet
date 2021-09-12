@@ -16,4 +16,8 @@ export const GlobalStyle = createGlobalStyle`
   *::after {
     box-sizing: border-box;
   }
+
+  .MuiTooltip-tooltip {
+    font-size: 1.4rem;
+  }
 `;

@@ -29,7 +29,9 @@
       "@style/*": ["style/*"],
       "@types": ["types"],
       "@types/*": ["types/*"],
-      "@assets/*": ["public/assets/*"]
+      "@assets/*": ["public/assets/*"],
+      "@icons/*": ["components/icons/*"],
+      "@icons": ["components/icons"]
     }
   },
   "include": [
