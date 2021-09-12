@@ -1,5 +1,5 @@
 import { hash, compare } from 'bcrypt';
-import { UserBaseDocument, UserDocument } from './users.types';
+import { UserBaseDocument, UserDocument } from './user.types';
 
 export async function hashPassword(password: string) {
   const hashedPassword = await hash(password, 12);
