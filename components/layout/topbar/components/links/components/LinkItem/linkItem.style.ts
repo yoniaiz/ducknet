@@ -5,7 +5,7 @@ export const StyledLink = styled(MuiLink)`
   color: ${({ theme }) => theme.colors.black};
 `;
 
-export const LinkItemContainer = styled.div<{ selected: boolean }>`
+export const LinkItemContainer = styled.a<{ selected: boolean }>`
   cursor: pointer;
   display: flex;
   flex-direction: column;

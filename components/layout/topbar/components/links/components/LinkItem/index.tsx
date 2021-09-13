@@ -17,7 +17,7 @@ const LinkItem = ({ Icon, link }: Props) => {
   return (
     <Link href={`/${link}`} passHref>
       <Tooltip enterDelay={500} title={capitalize(link)}>
-        <S.LinkItemContainer selected={selectedLink} aria-label={link}>
+        <S.LinkItemContainer tabIndex={0} selected={selectedLink} aria-label={link}>
           {Icon}
         </S.LinkItemContainer>
       </Tooltip>
