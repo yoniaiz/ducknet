@@ -56,7 +56,7 @@ export const Button = styled(MaterialUiButton)`
   ${({ variant = 'contained', color, theme, size = 'small' }) => css`
     ${getBtnStyle(variant, color, theme)}
 
-    padding: ${variant === 'contained' ? '0.7rem 1.6rem' : '0.6rem 1.5rem'};
+    padding: ${variant === 'contained' ? '0.5rem 1.55rem' : '0.4rem 1.45rem'};
     font-size: ${theme.fontSizes[size]};
     font-family: 'Heebo', sans-serif;
     font-weight: 400;

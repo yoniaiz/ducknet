@@ -4,11 +4,12 @@ export const GlobalStyle = createGlobalStyle`
   html { 
     font-size: 62.5%;
     font-family: 'Heebo', sans-serif;
-    background-color: ${({ theme }) => theme.colors.white2};
+    
  }
 
  body {
    font-size: 1.6rem;
+   background-color: ${({ theme }) => theme.colors.white2};
  }
 
   *,
