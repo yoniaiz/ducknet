@@ -7,7 +7,9 @@ const Logo = () => {
   return (
     <S.IconContainer>
       <Link href="/" passHref>
-        <Image src={Icon} alt="logo" />
+        <a>
+          <Image src={Icon} alt="logo" />
+        </a>
       </Link>
     </S.IconContainer>
   );

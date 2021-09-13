@@ -3,6 +3,7 @@ import Menu from '@material-ui/core/Menu';
 import * as S from './actions.style';
 import { UserCircleIcon, NotificationIcon } from '@icons';
 import Tooltip from '@material-ui/core/Tooltip';
+import { MessagesIcon } from '@components/icons/MessagesIcon';
 
 const Actions = () => {
   const [anchorEl, setAnchorEl] = useState<(EventTarget & HTMLButtonElement) | null>(null);
@@ -17,7 +18,18 @@ const Actions = () => {
   };
 
   return (
-    <div>
+    <S.Container>
+      <Tooltip title="Messages">
+        <S.NotificationIconBtn
+          aria-label="messages"
+          aria-controls="menu-appbar"
+          aria-haspopup="true"
+          onClick={() => console.log('messages')}
+          color="inherit"
+        >
+          <MessagesIcon size={'2rem'} />
+        </S.NotificationIconBtn>
+      </Tooltip>
       <Tooltip title="Notifications">
         <S.NotificationIconBtn
           aria-label="notifications"
@@ -57,7 +69,7 @@ const Actions = () => {
         <S.MenuItem onClick={handleClose}>Profile</S.MenuItem>
         <S.MenuItem onClick={handleClose}>Logout </S.MenuItem>
       </Menu>
-    </div>
+    </S.Container>
   );
 };
 

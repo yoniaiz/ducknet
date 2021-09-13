@@ -14,4 +14,8 @@ export const Nav = styled.nav`
   flex: 1;
   display: flex;
   justify-content: center;
+
+  @media only screen and (${({ theme }) => theme.device.max.smallLaptop}) {
+    display: none;
+  }
 `;

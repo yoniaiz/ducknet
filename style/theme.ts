@@ -1,3 +1,5 @@
+import { screenSize } from '@constants/sizes';
+
 export const theme = {
   colors: {
     black: '#444444',
@@ -30,5 +32,18 @@ export const theme = {
     small: '1.6rem',
     medium: '2.4rem',
     large: '3.2rem',
+  },
+  size: screenSize,
+  device: {
+    min: {
+      smallPhone: `min-width: ${screenSize.xs}`,
+      tablet: `min-width: ${screenSize.sm}`,
+      smallLaptop: `min-width: ${screenSize.lg}`,
+    },
+    max: {
+      smallPhone: `max-width: ${screenSize.xs}`,
+      tablet: `max-width: ${screenSize.sm}`,
+      smallLaptop: `max-width: ${screenSize.lg}`,
+    },
   },
 };
