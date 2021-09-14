@@ -15,6 +15,10 @@ export const CreateProjectBtn = styled(Button)`
   }
 `;
 
+export const LoginBtn = styled(Button)`
+  margin-left: 0.8rem;
+`;
+
 export const IconBtn = styled(IconButton)`
   padding: 0.4rem;
   color: ${({ theme }) => theme.colors.black};

@@ -1,5 +1,7 @@
 import Head from 'next/head';
 import Button from '@ui/button';
+import { GetServerSideProps } from 'next';
+import { getSession } from 'next-auth/client';
 
 export default function Home() {
   return (
@@ -35,3 +37,9 @@ export default function Home() {
     </div>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const session = await getSession({ req: context.req });
+  console.log({ session });
+  return { props: { session: 1 } };
+};
