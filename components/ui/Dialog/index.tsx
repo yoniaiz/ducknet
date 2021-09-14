@@ -6,6 +6,18 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import * as S from './dialog.style';
 import { XIcon } from '@components/icons';
+import { useState } from 'react';
+
+export const useModalState = (
+  isOpen = false
+): [boolean, { openModal: () => void; closeModal: () => void }] => {
+  const [open, setOpen] = useState(isOpen);
+
+  const openModal = () => setOpen(true);
+  const closeModal = () => setOpen(false);
+
+  return [open, { openModal, closeModal }];
+};
 
 const DialogTitle = ({
   children,
@@ -39,7 +51,13 @@ export default function Dialog({
   ...rest
 }: DialogProps & { open: boolean; onClose: () => void }) {
   return (
-    <S.Dialog {...rest} onClose={onClose} aria-labelledby="customized-dialog-title" open={open}>
+    <S.Dialog
+      {...rest}
+      fullWidth
+      onClose={onClose}
+      aria-labelledby="customized-dialog-title"
+      open={open}
+    >
       {children}
     </S.Dialog>
   );

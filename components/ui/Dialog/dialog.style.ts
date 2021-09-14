@@ -30,5 +30,6 @@ export const DialogActions = styled(MuiDialogActions)`
 `;
 
 export const DialogContent = styled(MuiDialogContent)`
-  padding: 1.6rem;
+  padding: 1.6rem 2.4rem;
+  background-color: ${({ theme }) => theme.colors.white1};
 `;
