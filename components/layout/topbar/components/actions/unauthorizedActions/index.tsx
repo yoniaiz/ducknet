@@ -1,43 +1,30 @@
 import Button from '@ui/button';
 import { DialogItems, useModalState } from '@ui/Dialog';
-import { useForm, Control } from 'react-hook-form';
+import { signIn } from 'next-auth/client';
 import { Container } from '../actions.style';
 import * as S from './unauthorizedActions.style';
 import ControlledInput from '@ui/ControlledInput';
+import { Formik } from 'formik';
 
 type Inputs = {
   email: string;
   password: string;
 };
 
-// eslint-disable-next-line @typescript-eslint/ban-types
-const LoginForm = ({ control }: { control: Control<Inputs, object> }) => {
-  return (
-    <>
-      <ControlledInput
-        control={control}
-        controllerProps={{ name: 'email', rules: { required: 'Email required' }, defaultValue: '' }}
-        textFieldProps={{ label: 'Email', type: 'email', fullWidth: true }}
-      />
-      <ControlledInput
-        control={control}
-        controllerProps={{
-          name: 'password',
-          rules: { required: 'Password required' },
-          defaultValue: '',
-        }}
-        textFieldProps={{ label: 'Password', type: 'password', fullWidth: true }}
-      />
-    </>
-  );
-};
-
 const UnauthorizedActions = () => {
   const [open, modalActions] = useModalState(true);
-  const { handleSubmit, control } = useForm<Inputs>();
 
-  const onSubmit = (data: Inputs) => {
-    console.log(data);
+  const handleSubmit = async (values: Inputs) => {
+    const result = await signIn('credentials', {
+      redirect: false,
+      ...values,
+    });
+
+    if (!result?.error) {
+      console.log('valid');
+    } else {
+      console.log('Not valid');
+    }
   };
 
   return (
@@ -50,19 +37,47 @@ const UnauthorizedActions = () => {
       </Container>
       <DialogItems.Dialog onClose={modalActions.closeModal} open={open}>
         <DialogItems.DialogTitle onClose={modalActions.closeModal}>Login</DialogItems.DialogTitle>
-        <form noValidate autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
-          <DialogItems.DialogContent>
-            <LoginForm control={control} />
-          </DialogItems.DialogContent>
-          <DialogItems.DialogActions>
-            <Button color="secondary" variant="outlined">
-              cancel
-            </Button>
-            <Button type="submit" color="secondary">
-              Submit
-            </Button>
-          </DialogItems.DialogActions>
-        </form>
+        <Formik
+          initialValues={{ email: '', password: '' }}
+          onSubmit={handleSubmit}
+          validate={(values) => {
+            const errors: Partial<Inputs> = {};
+
+            if (!values.email) {
+              errors.email = 'Required';
+            }
+
+            if (!values.password) {
+              errors.password = 'Required';
+            }
+
+            return errors;
+          }}
+        >
+          {(props) => {
+            return (
+              <>
+                <DialogItems.DialogContent>
+                  <ControlledInput name="email" label="Email" type="email" fullWidth />
+                  <ControlledInput name="password" label="Password" type="password" fullWidth />
+                </DialogItems.DialogContent>
+                <DialogItems.DialogActions>
+                  <Button color="secondary" variant="outlined">
+                    cancel
+                  </Button>
+                  <Button
+                    disabled={!props.dirty || !props.isValid}
+                    type="button"
+                    onClick={props.submitForm}
+                    color="secondary"
+                  >
+                    Submit
+                  </Button>
+                </DialogItems.DialogActions>
+              </>
+            );
+          }}
+        </Formik>
       </DialogItems.Dialog>
     </>
   );
