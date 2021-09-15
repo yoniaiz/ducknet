@@ -22,6 +22,12 @@ module.exports = {
     '^@pages/(.*)$': '<rootDir>/pages/$1',
     '^@ui/(.*)$': '<rootDir>/components/ui/$1',
     '^@style/(.*)$': '<rootDir>/style/$1',
+    '^@constants/(.*)$': '<rootDir>/constants/$1',
+    '^@style/(.*)$': '<rootDir>/style/$1',
+    '^@style': '<rootDir>/style',
+    '^@components/(.*)$': '<rootDir>/components/$1',
+    '^@icons': '<rootDir>/components/icons',
+    '^@hooks/(.*)$': '<rootDir>/hooks/$1',
   },
   testPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/.next/'],
   transform: {

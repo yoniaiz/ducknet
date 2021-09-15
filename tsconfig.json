@@ -13,6 +13,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
+    "types": ["cypress"],
     "baseUrl": ".",
     "paths": {
       "@pages": ["pages"],
@@ -32,7 +33,9 @@
       "@assets/*": ["public/assets/*"],
       "@icons/*": ["components/icons/*"],
       "@icons": ["components/icons"],
-      "@constants/*": ["constants/*"]
+      "@constants/*": ["constants/*"],
+      "@hooks/*": ["hooks/*"],
+      "@db/*": ["db/*"]
     }
   },
   "include": [

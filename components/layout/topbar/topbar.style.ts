@@ -11,7 +11,8 @@ export const Toolbar = styled(MuiToolbar)`
 `;
 
 export const Nav = styled.nav`
-  flex: 1 0;
+  padding-left: 75px;
+  flex: 1;
   display: flex;
   justify-content: center;
 
