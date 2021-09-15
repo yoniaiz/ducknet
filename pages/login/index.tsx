@@ -1,32 +1,16 @@
-import { getSession, signIn } from 'next-auth/client';
+import { getSession } from 'next-auth/client';
 import { Formik } from 'formik';
 import ControlledInput from '@ui/ControlledInput';
 import Button from '@ui/button';
 import Typography from '@material-ui/core/Typography';
 import * as S from './login.style';
 import { GetServerSideProps } from 'next';
-import { useRouter } from 'next/router';
-
-type Inputs = {
-  email: string;
-  password: string;
-};
+import { useSignIn } from 'hooks/useSignIn';
+import { IUser } from 'db/user/user.types';
+import { routes } from '@constants/routes';
 
 const Login = () => {
-  const { replace } = useRouter();
-
-  const handleSubmit = async (values: Inputs) => {
-    const result = await signIn('credentials', {
-      redirect: false,
-      ...values,
-    });
-    console.log(result);
-    if (!result?.error) {
-      replace('/projects');
-    } else {
-      console.log('Not valid');
-    }
-  };
+  const handleLogin = useSignIn();
 
   return (
     <S.Container>
@@ -37,9 +21,9 @@ const Login = () => {
 
         <Formik
           initialValues={{ email: '', password: '' }}
-          onSubmit={handleSubmit}
+          onSubmit={handleLogin}
           validate={(values) => {
-            const errors: Partial<Inputs> = {};
+            const errors: Partial<IUser> = {};
 
             if (!values.email) {
               errors.email = 'Required';
@@ -81,7 +65,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   if (session) {
     return {
       redirect: {
-        destination: '/projects',
+        destination: routes.projects,
         permanent: false,
       },
     };

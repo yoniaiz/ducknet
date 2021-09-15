@@ -3,12 +3,13 @@ import MuiLink from '@material-ui/core/Link';
 import Button from '@ui/button';
 import { Container } from '../actions.style';
 import * as S from './unauthorizedActions.style';
+import { routes } from '@constants/routes';
 
 const UnauthorizedActions = () => {
   return (
     <>
       <Container>
-        <Link href="/login" passHref>
+        <Link href={routes.login} passHref>
           <MuiLink
             underline="none"
             component={(props) => (
@@ -18,7 +19,7 @@ const UnauthorizedActions = () => {
             )}
           />
         </Link>
-        <Link href="/register" passHref>
+        <Link href={routes.register} passHref>
           <MuiLink
             underline="none"
             component={(props) => (

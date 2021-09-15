@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { signOut } from 'next-auth/client';
 import { UserCircleIcon, NotificationIcon } from '@icons';
 import Tooltip from '@material-ui/core/Tooltip';
 import Menu from '@material-ui/core/Menu';
@@ -14,6 +15,10 @@ const AuthorizedActions = () => {
     setAnchorEl(event.currentTarget);
   };
 
+  const handleLogout = async () => {
+    await signOut();
+    handleClose();
+  };
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -68,7 +73,7 @@ const AuthorizedActions = () => {
         onClose={handleClose}
       >
         <S.MenuItem onClick={handleClose}>Profile</S.MenuItem>
-        <S.MenuItem onClick={handleClose}>Logout </S.MenuItem>
+        <S.MenuItem onClick={handleLogout}>Logout</S.MenuItem>
       </Menu>
     </Container>
   );

@@ -11,8 +11,8 @@ function MyApp({ Component, pageProps }: AppProps) {
     <AuthProvider session={pageProps.session}>
       <StylesProvider injectFirst>
         <ThemeProvider theme={theme}>
-          <GlobalStyle />
           <CssBaseline />
+          <GlobalStyle />
           <Layout>
             <Component {...pageProps} />
           </Layout>

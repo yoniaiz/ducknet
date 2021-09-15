@@ -6,25 +6,17 @@ import Typography from '@material-ui/core/Typography';
 import * as S from './register.style';
 import axios from 'axios';
 import { GetServerSideProps } from 'next';
-import { useRouter } from 'next/router';
-
-type Inputs = {
-  email: string;
-  password: string;
-  firstName: string;
-  lastName: string;
-};
+import { useSignIn } from 'hooks/useSignIn';
+import { IUser } from 'db/user/user.types';
+import { routes } from '@constants/routes';
 
 const Register = () => {
-  const { replace } = useRouter();
+  const handleLogin = useSignIn();
 
-  const handleSubmit = async (body: Inputs) => {
+  const handleSubmit = async (body: IUser) => {
     try {
-      const { data } = await axios.post('/api/auth/signup', body);
-      console.log(data);
-      replace('/login');
-
-      console.log('Not valid');
+      await axios.post('/api/auth/signup', body);
+      await handleLogin(body);
     } catch (e) {
       console.log(e);
     }
@@ -41,7 +33,7 @@ const Register = () => {
           initialValues={{ email: '', password: '', firstName: '', lastName: '' }}
           onSubmit={handleSubmit}
           validate={(values) => {
-            const errors: Partial<Inputs> = {};
+            const errors: Partial<IUser> = {};
 
             if (!values.email) {
               errors.email = 'Required';
@@ -93,7 +85,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   if (session) {
     return {
       redirect: {
-        destination: '/projects',
+        destination: routes.projects,
         permanent: false,
       },
     };
