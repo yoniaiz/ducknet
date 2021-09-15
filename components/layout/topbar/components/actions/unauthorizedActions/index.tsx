@@ -11,6 +11,7 @@ const UnauthorizedActions = () => {
       <Container>
         <Link href={routes.login} passHref>
           <MuiLink
+            data-testid="link--login"
             underline="none"
             component={(props) => (
               <Button {...props} color="primary" variant="outlined">
@@ -22,6 +23,7 @@ const UnauthorizedActions = () => {
         <Link href={routes.register} passHref>
           <MuiLink
             underline="none"
+            data-testid="link--register"
             component={(props) => (
               <S.LoginBtn {...props} color="primary">
                 Sign up
