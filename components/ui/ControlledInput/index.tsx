@@ -11,8 +11,8 @@ const ControlledInput = (props: TextFieldProps) => {
       {...props}
       variant="outlined"
       {...field}
-      error={!!meta.error}
-      helperText={meta.error}
+      error={!!meta.error && meta.touched}
+      helperText={meta.touched ? meta.error : ''}
     />
   );
 };

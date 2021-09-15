@@ -1,6 +1,6 @@
 import { Document, Model, Types } from 'mongoose';
 
-export interface User {
+export interface IUser {
   firstName: string;
   lastName: string;
   password: string;
@@ -8,11 +8,11 @@ export interface User {
   projects?: Types.Array<string>;
 }
 
-export type PartialUser = Pick<User, 'email' | 'projects'> & {
+export type PartialUser = Pick<IUser, 'email' | 'projects'> & {
   fullName: string;
 };
 
-export interface UserBaseDocument extends User, Document {
+export interface UserBaseDocument extends IUser, Document {
   fullName: string;
   getUser: () => PartialUser;
 }

@@ -6,11 +6,8 @@ export async function hashPassword(password: string) {
   return hashedPassword;
 }
 
-export async function verifyPassword(password: string, hashedPassword: string) {
-  const isEqual = await compare(password, hashedPassword);
-
-  return isEqual;
-}
+export const verifyPassword = (password: string, hashedPassword: string) =>
+  compare(password, hashedPassword);
 
 export function getUsername(this: UserBaseDocument) {
   return this.firstName + this.lastName;

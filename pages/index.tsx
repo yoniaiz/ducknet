@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import Button from '@ui/button';
 import { GetServerSideProps } from 'next';
 import { getSession } from 'next-auth/client';
 
@@ -14,26 +13,6 @@ export default function Home() {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main style={{ margin: 20 }}>
-        <Button color="primary" variant="contained">
-          my button
-        </Button>
-        <Button color="secondary" variant="contained">
-          my button
-        </Button>
-        <Button color="secondary" variant="outlined">
-          my button
-        </Button>
-        <Button color="primary" variant="outlined">
-          my button
-        </Button>
-        <Button disabled color="primary" variant="outlined">
-          my button
-        </Button>
-        <Button disabled color="primary" variant="contained">
-          my button
-        </Button>
-      </main>
     </div>
   );
 }
