@@ -9,6 +9,7 @@ const getBtnStyle = (
   const contained = {
     primary: css`
       background: ${theme.gradients.purpleRtl};
+      color: ${theme.colors.white1};
     `,
     secondary: css`
       background: ${theme.gradients.blueRtl};

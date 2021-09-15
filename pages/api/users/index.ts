@@ -1,6 +1,6 @@
 import nc from 'next-connect';
-import UserModel from 'db/users/user.model';
-import { PartialUser } from 'db/users/user.types';
+import UserModel from 'db/user/user.model';
+import { PartialUser } from 'db/user/user.types';
 import type { NextApiResponse } from 'next';
 import { connectMongoDb } from 'lib/connectMongoDb';
 

@@ -13,14 +13,26 @@ const UserSchema = new Schema<UserDocument, UserModel>({
       validator: (name: string) => name?.length > 2,
     },
   },
-  lastName: String,
+  lastName: {
+    type: String,
+    required: true,
+    validate: {
+      validator: (name: string) => name?.length > 2,
+    },
+  },
   password: {
     type: String,
     required: true,
+    validate: {
+      validator: (password: string) => password?.length > 7,
+    },
   },
   email: {
     type: String,
     required: true,
+    validate: {
+      validator: (email: string) => email?.includes('@'),
+    },
   },
 });
 
