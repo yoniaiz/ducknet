@@ -42,6 +42,7 @@ export const theme = {
     },
     max: {
       smallPhone: `max-width: ${screenSize.xs}`,
+      phone: `max-width: ${screenSize.phone}`,
       tablet: `max-width: ${screenSize.sm}`,
       smallLaptop: `max-width: ${screenSize.lg}`,
     },

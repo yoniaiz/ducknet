@@ -3,10 +3,10 @@ import { Formik } from 'formik';
 import ControlledInput from '@ui/ControlledInput';
 import Button from '@ui/button';
 import Typography from '@material-ui/core/Typography';
-import * as S from './login.style';
+import * as S from '@style/sharedStyles.style';
 import { GetServerSideProps } from 'next';
-import { useSignIn } from 'hooks/useSignIn';
-import { IUser } from 'db/user/user.types';
+import { useSignIn } from '@hooks/useSignIn';
+import { IUser } from '@db/user/user.types';
 import { routes } from '@constants/routes';
 
 const Login = () => {
@@ -39,8 +39,14 @@ const Login = () => {
           {(props) => {
             return (
               <S.FormContainer>
-                <ControlledInput name="email" label="Email" type="email" fullWidth />
-                <ControlledInput name="password" label="Password" type="password" fullWidth />
+                <ControlledInput id="email" name="email" label="Email" type="email" fullWidth />
+                <ControlledInput
+                  id="password"
+                  name="password"
+                  label="Password"
+                  type="password"
+                  fullWidth
+                />
 
                 <Button
                   disabled={!props.dirty || !props.isValid}

@@ -3,11 +3,11 @@ import { Formik } from 'formik';
 import ControlledInput from '@ui/ControlledInput';
 import Button from '@ui/button';
 import Typography from '@material-ui/core/Typography';
-import * as S from './register.style';
+import * as S from '../../style/sharedStyles.style';
 import axios from 'axios';
 import { GetServerSideProps } from 'next';
-import { useSignIn } from 'hooks/useSignIn';
-import { IUser } from 'db/user/user.types';
+import { useSignIn } from '@hooks/useSignIn';
+import { IUser } from '@db/user/user.types';
 import { routes } from '@constants/routes';
 
 const Register = () => {
@@ -57,10 +57,36 @@ const Register = () => {
           {(props) => {
             return (
               <S.FormContainer>
-                <ControlledInput name="firstName" label="First name" fullWidth />
-                <ControlledInput name="lastName" label="Last name" fullWidth />
-                <ControlledInput name="email" label="Email" type="email" fullWidth />
-                <ControlledInput name="password" label="Password" type="password" fullWidth />
+                <ControlledInput
+                  required
+                  id="firstName"
+                  name="firstName"
+                  label="First name"
+                  fullWidth
+                />
+                <ControlledInput
+                  required
+                  id="lastName"
+                  name="lastName"
+                  label="Last name"
+                  fullWidth
+                />
+                <ControlledInput
+                  required
+                  id="email"
+                  name="email"
+                  label="Email"
+                  type="email"
+                  fullWidth
+                />
+                <ControlledInput
+                  required
+                  id="password"
+                  name="password"
+                  label="Password"
+                  type="password"
+                  fullWidth
+                />
 
                 <Button
                   disabled={!props.dirty || !props.isValid}

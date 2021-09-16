@@ -4,4 +4,5 @@ export const routes = {
   projects: '/projects',
   mentors: '/mentors',
   networks: '/network',
+  create: '/create',
 };
