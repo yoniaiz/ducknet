@@ -3,9 +3,15 @@ import TopBar from './topbar';
 import BottomNavigation from './bottomNavigation';
 import * as S from './layout.style';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { useSession } from 'next-auth/client';
 
 const Layout: React.FC = ({ children }) => {
+  const [, isLoading] = useSession();
   const isSmallLaptopAndAbove = useMediaQuery('(min-width: 1200px)');
+
+  if (isLoading) {
+    return null;
+  }
 
   return (
     <>
