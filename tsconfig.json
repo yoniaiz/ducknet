@@ -13,7 +13,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "types": ["cypress", "@testing-library/cypress"],
+    "types": ["jest", "cypress", "@testing-library/cypress"],
     "baseUrl": ".",
     "paths": {
       "@pages": ["pages"],
@@ -44,9 +44,7 @@
     "**/*.tsx",
     "lib/connectMongoDb.ts",
     "jest.setup.js",
-    "utils/test-utils/connectTestMongoDb.js",
-    "cypress/*",
-    "cypress/support/commands.js"
+    "utils/test-utils/connectTestMongoDb.js"
   ],
   "exclude": ["node_modules"]
 }
