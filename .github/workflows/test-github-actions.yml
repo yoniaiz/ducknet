@@ -1,0 +1,11 @@
+name: test-github-actions
+on: [push]
+jobs:
+  check-node-version:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node_version: '16'
+      - run: node -v
