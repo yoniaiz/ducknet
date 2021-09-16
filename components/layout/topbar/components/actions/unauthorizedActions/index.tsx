@@ -8,28 +8,18 @@ import { routes } from '@constants/routes';
 const UnauthorizedActions = () => {
   return (
     <>
-      <Container>
+      <Container data-testid="actions-container">
         <Link href={routes.login} passHref>
-          <MuiLink
-            data-testid="link--login"
-            underline="none"
-            component={(props) => (
-              <Button {...props} color="primary" variant="outlined">
-                Login
-              </Button>
-            )}
-          />
+          <MuiLink underline="none" data-testid="link--login">
+            <Button color="primary" variant="outlined">
+              Login
+            </Button>
+          </MuiLink>
         </Link>
         <Link href={routes.register} passHref>
-          <MuiLink
-            underline="none"
-            data-testid="link--register"
-            component={(props) => (
-              <S.LoginBtn {...props} color="primary">
-                Sign up
-              </S.LoginBtn>
-            )}
-          />
+          <MuiLink underline="none" data-testid="link--register">
+            <S.LoginBtn color="primary">Sign up</S.LoginBtn>
+          </MuiLink>
         </Link>
       </Container>
     </>
