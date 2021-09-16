@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import Link from 'next/link';
+import MuiLink from '@material-ui/core/Link';
 import { signOut } from 'next-auth/client';
 import { UserCircleIcon, NotificationIcon } from '@icons';
 import Tooltip from '@material-ui/core/Tooltip';
@@ -6,6 +8,7 @@ import Menu from '@material-ui/core/Menu';
 import { MessagesIcon } from '@components/icons/MessagesIcon';
 import { Container } from '../actions.style';
 import * as S from './authorizedActions.style';
+import { routes } from '@constants/routes';
 
 const AuthorizedActions = () => {
   const [anchorEl, setAnchorEl] = useState<(EventTarget & HTMLButtonElement) | null>(null);
@@ -47,7 +50,11 @@ const AuthorizedActions = () => {
           <NotificationIcon size={'2rem'} />
         </S.NotificationIconBtn>
       </Tooltip>
-      <S.CreateProjectBtn color="primary">Create project</S.CreateProjectBtn>
+      <Link href={routes.create} passHref>
+        <MuiLink underline="none" data-testid="link--create">
+          <S.CreateProjectBtn color="primary">Create project</S.CreateProjectBtn>
+        </MuiLink>
+      </Link>
       <S.IconBtn
         aria-label="account of current user"
         aria-controls="menu-appbar"

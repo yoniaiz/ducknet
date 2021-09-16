@@ -39,8 +39,14 @@ const Login = () => {
           {(props) => {
             return (
               <S.FormContainer>
-                <ControlledInput name="email" label="Email" type="email" fullWidth />
-                <ControlledInput name="password" label="Password" type="password" fullWidth />
+                <ControlledInput id="email" name="email" label="Email" type="email" fullWidth />
+                <ControlledInput
+                  id="password"
+                  name="password"
+                  label="Password"
+                  type="password"
+                  fullWidth
+                />
 
                 <Button
                   disabled={!props.dirty || !props.isValid}

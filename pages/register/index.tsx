@@ -57,10 +57,36 @@ const Register = () => {
           {(props) => {
             return (
               <S.FormContainer>
-                <ControlledInput name="firstName" label="First name" fullWidth />
-                <ControlledInput name="lastName" label="Last name" fullWidth />
-                <ControlledInput name="email" label="Email" type="email" fullWidth />
-                <ControlledInput name="password" label="Password" type="password" fullWidth />
+                <ControlledInput
+                  required
+                  id="firstName"
+                  name="firstName"
+                  label="First name"
+                  fullWidth
+                />
+                <ControlledInput
+                  required
+                  id="lastName"
+                  name="lastName"
+                  label="Last name"
+                  fullWidth
+                />
+                <ControlledInput
+                  required
+                  id="email"
+                  name="email"
+                  label="Email"
+                  type="email"
+                  fullWidth
+                />
+                <ControlledInput
+                  required
+                  id="password"
+                  name="password"
+                  label="Password"
+                  type="password"
+                  fullWidth
+                />
 
                 <Button
                   disabled={!props.dirty || !props.isValid}
