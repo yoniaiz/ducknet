@@ -11,6 +11,7 @@ describe('Navigation', () => {
     });
 
     it('shouldnt be able to got to create project page', () => {
+      cy.visit(routes.login);
       cy.url().should('include', routes.login);
       cy.visit(routes.create);
       cy.url().should('include', routes.login);
