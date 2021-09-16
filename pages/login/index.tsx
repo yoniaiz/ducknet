@@ -6,8 +6,10 @@ import Typography from '@material-ui/core/Typography';
 import * as S from '@style/sharedStyles.style';
 import { GetServerSideProps } from 'next';
 import { useSignIn } from '@hooks/useSignIn';
-import { IUser } from '@db/user/user.types';
 import { routes } from '@constants/routes';
+import * as Yup from 'yup';
+import { emailValidation } from '@utils/validations/email';
+import { passwordValidation } from '@utils/validations/password';
 
 const Login = () => {
   const handleLogin = useSignIn();
@@ -22,19 +24,10 @@ const Login = () => {
         <Formik
           initialValues={{ email: '', password: '' }}
           onSubmit={handleLogin}
-          validate={(values) => {
-            const errors: Partial<IUser> = {};
-
-            if (!values.email) {
-              errors.email = 'Required';
-            }
-
-            if (!values.password) {
-              errors.password = 'Required';
-            }
-
-            return errors;
-          }}
+          validationSchema={Yup.object().shape({
+            email: emailValidation,
+            password: passwordValidation,
+          })}
         >
           {(props) => {
             return (

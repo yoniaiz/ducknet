@@ -16,4 +16,6 @@ export const Container = styled.div`
 
 export const FormContainer = styled.div`
   margin-top: 0.8rem;
+  width: 40vw;
+  min-width: 300px;
 `;

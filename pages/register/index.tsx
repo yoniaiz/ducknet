@@ -9,6 +9,9 @@ import { GetServerSideProps } from 'next';
 import { useSignIn } from '@hooks/useSignIn';
 import { IUser } from '@db/user/user.types';
 import { routes } from '@constants/routes';
+import * as Yup from 'yup';
+import { emailValidation } from '@utils/validations/email';
+import { passwordValidation } from '@utils/validations/password';
 
 const Register = () => {
   const handleLogin = useSignIn();
@@ -32,27 +35,12 @@ const Register = () => {
         <Formik
           initialValues={{ email: '', password: '', firstName: '', lastName: '' }}
           onSubmit={handleSubmit}
-          validate={(values) => {
-            const errors: Partial<IUser> = {};
-
-            if (!values.email) {
-              errors.email = 'Required';
-            }
-
-            if (!values.password) {
-              errors.password = 'Required';
-            }
-
-            if (!values.firstName) {
-              errors.firstName = 'Required';
-            }
-
-            if (!values.firstName) {
-              errors.lastName = 'Required';
-            }
-
-            return errors;
-          }}
+          validationSchema={Yup.object().shape({
+            email: emailValidation,
+            password: passwordValidation,
+            firstName: Yup.string().required().min(2),
+            lastName: Yup.string().required().min(2),
+          })}
         >
           {(props) => {
             return (

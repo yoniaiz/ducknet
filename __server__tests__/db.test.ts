@@ -7,7 +7,7 @@ beforeAll(async () => await connectMongoDb());
 afterEach(async () => await clearCollections());
 afterAll(async () => await closeConnection());
 
-describe('Creating records', () => {
+describe.skip('Creating records', () => {
   it('saves a user', async () => {
     const user1 = new User({ name: 'user1' });
 
@@ -18,7 +18,7 @@ describe('Creating records', () => {
 
 let user: TestUserDoc;
 
-describe('Reading tests', () => {
+describe.skip('Reading tests', () => {
   beforeEach(async () => {
     const user1 = new User({ name: 'user1' });
     user = await user1.save();
@@ -35,7 +35,7 @@ describe('Reading tests', () => {
   });
 });
 
-describe('Delete', () => {
+describe.skip('Delete', () => {
   beforeEach(async () => {
     const user1 = new User({ name: 'user1' });
     user = await user1.save();
@@ -66,7 +66,7 @@ describe('Delete', () => {
   });
 });
 
-describe('update', () => {
+describe.skip('update', () => {
   beforeEach(async () => {
     const user1 = new User({ name: 'user1', likes: 0 });
     user = await user1.save();
@@ -97,7 +97,7 @@ describe('update', () => {
   });
 });
 
-describe('sub docs', () => {
+describe.skip('sub docs', () => {
   it('add sub doc', async () => {
     const user1 = new User({ name: 'user1', posts: [{ title: 'post 1' }] });
     await user1.save();
@@ -139,7 +139,7 @@ describe('sub docs', () => {
 
 let project: ProjectDoc;
 
-describe('test associations', () => {
+describe.skip('test associations', () => {
   let comment: CommentDoc;
 
   beforeEach(async () => {
@@ -198,7 +198,7 @@ describe('test associations', () => {
   });
 });
 
-describe('middleware test', () => {
+describe.skip('middleware test', () => {
   beforeEach(async () => {
     project = new Project({ title: 'project title', content: 'this is the content' });
     user = new User({ name: 'User1', projects: [project._id] });
@@ -216,7 +216,7 @@ describe('middleware test', () => {
   });
 });
 
-describe('pagination', () => {
+describe.skip('pagination', () => {
   beforeEach(async () => {
     const createUserPromises = Array.from({ length: 4 }, (_, i) =>
       new User({ name: `user ${i + 1}` }).save()

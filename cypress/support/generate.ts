@@ -5,6 +5,6 @@ export const buildUser = (overrides?: Partial<IUser>): IUser => ({
   firstName: faker.name.firstName(),
   lastName: faker.name.lastName(),
   email: faker.internet.email(),
-  password: faker.internet.password(8),
+  password: `${faker.internet.password(8, false)}!1Aa`,
   ...overrides,
 });

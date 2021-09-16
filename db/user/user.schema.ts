@@ -3,6 +3,8 @@ import { UserDocument, UserModel } from './user.types';
 import * as methods from './user.methods';
 import * as statics from './user.statics';
 import * as utils from './user.utils';
+import { passwordValidation } from '@utils/validations/password';
+import { emailValidation } from '@utils/validations/email';
 
 const UserSchema = new Schema<UserDocument, UserModel>({
   id: Types.ObjectId,
@@ -24,14 +26,28 @@ const UserSchema = new Schema<UserDocument, UserModel>({
     type: String,
     required: true,
     validate: {
-      validator: (password: string) => password?.length > 7,
+      validator: (password: string) => {
+        try {
+          passwordValidation.validateSync(password);
+          return true;
+        } catch (e) {
+          return false;
+        }
+      },
     },
   },
   email: {
     type: String,
     required: true,
     validate: {
-      validator: (email: string) => email?.includes('@'),
+      validator: (password: string) => {
+        try {
+          emailValidation.validateSync(password);
+          return true;
+        } catch (e) {
+          return false;
+        }
+      },
     },
   },
 });

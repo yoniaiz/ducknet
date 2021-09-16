@@ -16,6 +16,15 @@ export const Input = styled(TextField)`
   }
 
   input {
+    width: 100%;
     font-size: 1.6rem;
+  }
+
+  p {
+    font-size: 1.2rem;
+    width: fit-content;
+    margin: 0.5rem 0 0 0;
+    font-family: 'Heebo', sans-serif;
+    display: inline-block;
   }
 `;
