@@ -1,0 +1,19 @@
+name: test-and-deploy
+on: [push]
+jobs:
+  test-and-deploy:
+    runs-on: ubuntu-latest
+    env:
+      MONGODB_URI: ${{ secrets.MONGODB_URI }}
+      NEXTAUTH_URL: http://localhost:3000
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node_version: 14
+      - name: install deps
+        run: npm ci
+      - name: run server&client integration + unit tests
+        run: npm run test
+      - name: run e2e tests
+        run: npm run test:e2e

@@ -1,11 +1,11 @@
 import User, { TestUserDoc } from '@utils/test-utils/user';
-import { connectMongoDb, closeConnection, clearCollections } from '@lib/connectMongoDb';
+import { connectToDb, disconnectDb, clearCollections } from '@lib/connectMongoDb';
 import Project, { ProjectDoc } from '@utils/test-utils/project';
 import Comment, { CommentDoc } from '@utils/test-utils/comment';
 
-beforeAll(async () => await connectMongoDb());
+beforeAll(async () => await connectToDb());
 afterEach(async () => await clearCollections());
-afterAll(async () => await closeConnection());
+afterAll(async () => await disconnectDb());
 
 describe.skip('Creating records', () => {
   it('saves a user', async () => {
