@@ -10,7 +10,7 @@ export const verifyPassword = (password: string, hashedPassword: string) =>
   compare(password, hashedPassword);
 
 export function getUsername(this: UserBaseDocument) {
-  return this.firstName + this.lastName;
+  return this.firstName + ' ' + this.lastName;
 }
 
 export async function preUserChange(this: UserDocument) {

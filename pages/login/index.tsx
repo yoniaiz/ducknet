@@ -13,7 +13,6 @@ import { passwordValidation } from '@utils/validations/password';
 
 const Login = () => {
   const handleLogin = useSignIn();
-
   return (
     <S.Container>
       <div>
@@ -43,6 +42,7 @@ const Login = () => {
 
                 <Button
                   disabled={!props.dirty || !props.isValid}
+                  isLoading={props.isSubmitting}
                   type="button"
                   onClick={props.submitForm}
                   color="secondary"

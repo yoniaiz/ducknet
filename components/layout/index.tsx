@@ -7,6 +7,7 @@ import { useSession } from 'next-auth/client';
 
 const Layout: React.FC = ({ children }) => {
   const [, isLoading] = useSession();
+
   const isSmallLaptopAndAbove = useMediaQuery('(min-width: 1200px)');
 
   if (isLoading) {

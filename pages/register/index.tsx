@@ -1,10 +1,10 @@
+import axios from 'axios';
 import { getSession } from 'next-auth/client';
 import { Formik } from 'formik';
 import ControlledInput from '@ui/ControlledInput';
 import Button from '@ui/button';
 import Typography from '@material-ui/core/Typography';
 import * as S from '../../style/sharedStyles.style';
-import axios from 'axios';
 import { GetServerSideProps } from 'next';
 import { useSignIn } from '@hooks/useSignIn';
 import { IUser } from '@db/user/user.types';
@@ -12,6 +12,8 @@ import { routes } from '@constants/routes';
 import * as Yup from 'yup';
 import { emailValidation } from '@utils/validations/email';
 import { passwordValidation } from '@utils/validations/password';
+import { toast } from 'react-toastify';
+import { isAxiosErrorMessage } from '@utils/typeGuards';
 
 const Register = () => {
   const handleLogin = useSignIn();
@@ -21,7 +23,9 @@ const Register = () => {
       await axios.post('/api/auth/signup', body);
       await handleLogin(body);
     } catch (e) {
-      console.log(e);
+      if (isAxiosErrorMessage(e)) {
+        toast.error(e.response?.data.message);
+      }
     }
   };
 
@@ -78,6 +82,7 @@ const Register = () => {
 
                 <Button
                   disabled={!props.dirty || !props.isValid}
+                  isLoading={props.isSubmitting}
                   type="button"
                   onClick={props.submitForm}
                   color="secondary"
