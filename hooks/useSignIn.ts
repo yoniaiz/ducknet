@@ -11,15 +11,13 @@ export const useSignIn = () => {
       redirect: false,
       ...credential,
     });
-
     if (result?.error) {
       toast.error(result.error);
     } else {
       replace(routes.projects);
       const session = await getSession();
       if (session?.user) {
-        // @ts-expect-error
-        toast.success(`Welcome ${session.user.fullName}!`);
+        toast.success(`Welcome ${session.user.name}!`);
       }
     }
   };

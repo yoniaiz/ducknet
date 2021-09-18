@@ -1,9 +1,10 @@
 import { Document, Model, Types } from 'mongoose';
 
 export interface IUser {
-  firstName: string;
-  lastName: string;
+  firstName?: string;
+  lastName?: string;
   password: string;
+  username?: string;
   email: string;
   projects?: Types.Array<string>;
 }

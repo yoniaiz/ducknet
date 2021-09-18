@@ -1,7 +1,7 @@
-import axios from 'axios';
 import { getSession } from 'next-auth/client';
 import { Formik } from 'formik';
 import ControlledInput from '@ui/ControlledInput';
+import axios from 'axios';
 import Button from '@ui/button';
 import Typography from '@material-ui/core/Typography';
 import * as S from '../../style/sharedStyles.style';
@@ -37,13 +37,12 @@ const Register = () => {
         </Typography>
 
         <Formik
-          initialValues={{ email: '', password: '', firstName: '', lastName: '' }}
+          initialValues={{ email: '', password: '', username: '' }}
           onSubmit={handleSubmit}
           validationSchema={Yup.object().shape({
             email: emailValidation,
             password: passwordValidation,
-            firstName: Yup.string().required().min(2),
-            lastName: Yup.string().required().min(2),
+            username: Yup.string().required().min(2),
           })}
         >
           {(props) => {
@@ -51,16 +50,9 @@ const Register = () => {
               <S.FormContainer>
                 <ControlledInput
                   required
-                  id="firstName"
-                  name="firstName"
-                  label="First name"
-                  fullWidth
-                />
-                <ControlledInput
-                  required
-                  id="lastName"
-                  name="lastName"
-                  label="Last name"
+                  id="username"
+                  name="username"
+                  label="Username"
                   fullWidth
                 />
                 <ControlledInput

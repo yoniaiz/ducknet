@@ -14,7 +14,6 @@ handler.get(async (_, res: NextApiResponse<HandlerResponse>) => {
 
     res.status(200).json({ users: users.map((user) => user.getUser()) });
   } catch (e) {
-    console.log(e);
     res.status(500).json({ message: 'error' });
   }
 });
