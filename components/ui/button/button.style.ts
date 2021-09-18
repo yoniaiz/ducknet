@@ -1,5 +1,6 @@
 import styled, { css, DefaultTheme } from 'styled-components';
 import MaterialUiButton, { ButtonProps } from '@material-ui/core/Button';
+import { CircularProgress } from '@material-ui/core';
 
 const getBtnStyle = (
   variant: ButtonProps['variant'] = 'contained',
@@ -73,4 +74,9 @@ export const Button = styled(MaterialUiButton)`
       }
     `}
   `}
+`;
+
+export const Loader = styled(CircularProgress)`
+  position: absolute;
+  color: ${({ theme }) => theme.colors.blue2};
 `;

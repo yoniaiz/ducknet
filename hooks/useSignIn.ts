@@ -1,7 +1,8 @@
 import { routes } from '@constants/routes';
 import { IUser } from 'db/user/user.types';
-import { signIn } from 'next-auth/client';
+import { getSession, signIn } from 'next-auth/client';
 import { useRouter } from 'next/router';
+import { toast } from 'react-toastify';
 
 export const useSignIn = () => {
   const { replace } = useRouter();
@@ -12,9 +13,14 @@ export const useSignIn = () => {
     });
 
     if (result?.error) {
-      console.log(result.error);
+      toast.error(result.error);
     } else {
-      replace(routes.projects);
+      const session = await getSession();
+      if (session?.user) {
+        replace(routes.projects);
+        // @ts-expect-error
+        toast.success(`Welcome ${session.user.fullName}!`);
+      }
     }
   };
 
