@@ -15,7 +15,7 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
 
     const user = new User(data);
     const validations = user.validateSync();
-    throw new Error('whay happends?!');
+
     if (validations?.errors) {
       const errors: Record<string, string> = {};
 
