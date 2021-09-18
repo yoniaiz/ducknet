@@ -4,10 +4,6 @@ export const GlobalStyle = createGlobalStyle`
   html { 
     font-size: 62.5%;
     font-family: 'Heebo', sans-serif;
-
-    @media only screen and (${({ theme }) => theme.device.max.smallLaptop}) {
-      font-size: 55%;
-    }
  }
 
  body {

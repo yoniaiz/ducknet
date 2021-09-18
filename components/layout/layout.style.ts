@@ -11,7 +11,7 @@ export const Main = styled.main<{ fullHeight: number }>`
   padding: 4.8rem 22.4rem 3rem 6.7rem;
 
   @media only screen and (${({ theme }) => theme.device.max.smallLaptop}) {
-    height: calc(${({ fullHeight }) => fullHeight} - ${NAV_HEIGHT}rem - 56px);
+    height: calc(${({ fullHeight }) => fullHeight}px - ${NAV_HEIGHT}rem - 56px);
     width: 100%;
     padding: 5rem 2rem;
   }
