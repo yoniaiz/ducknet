@@ -1,14 +1,12 @@
 import mongoose from 'mongoose';
 
 const DB_NAME = process.env.Cypress || process.env.NODE_ENV === 'test' ? 'ducknet-test' : 'ducknet';
-const PRODUCTION_CONFIG =
-  process.env.NODE_ENV === 'production' ? '?retryWrites=true&w=majority' : '';
 
 if (!process.env.MONGODB_URI) {
   throw new Error('Please define the MONGODB_URI environment variable inside .env.local');
 }
 
-const MONGODB_URI = process.env.MONGODB_URI + DB_NAME + PRODUCTION_CONFIG;
+const MONGODB_URI = process.env.MONGODB_URI + DB_NAME + process.env.PRODUCTION_CONFIG || '';
 
 /**
  * Global is used here to maintain a cached connection across hot reloads
