@@ -15,7 +15,7 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
 
     const user = new User(data);
     const validations = user.validateSync();
-
+    throw new Error('whay happends?!');
     if (validations?.errors) {
       const errors: Record<string, string> = {};
 
@@ -41,7 +41,9 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
     if (isCostumeError(e)) {
       res.status(e.status).json({ message: e.message });
     } else {
-      res.status(500).json({ message: 'something went wrong' });
+      // @ts-ignore
+      const message = e?.message || e;
+      res.status(500).json({ message: 'something went wrong', error: message });
     }
   }
 });
