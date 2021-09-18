@@ -15,9 +15,9 @@ export const useSignIn = () => {
     if (result?.error) {
       toast.error(result.error);
     } else {
+      replace(routes.projects);
       const session = await getSession();
       if (session?.user) {
-        replace(routes.projects);
         // @ts-expect-error
         toast.success(`Welcome ${session.user.fullName}!`);
       }
