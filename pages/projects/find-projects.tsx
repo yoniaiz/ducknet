@@ -1,35 +1,29 @@
-import axios from 'axios';
-import Image from 'next/image';
+import { LOAD_PROJECTS } from 'GraphQl/queries/projects';
+import client from '@utils/apollo-client';
+import { GetStaticProps } from 'next';
 
 interface Props {
-  projects: {
-    id: string;
-    title: string;
-    description: string;
-    image: {
-      url: string;
-      name: string;
-    };
-  }[];
+  projects: Project[];
 }
+
 const FindProjects = ({ projects }: Props) => {
   if (projects?.length) {
     return projects.map((project) => (
       <div key={project.id}>
         <h3>{project.title}</h3>
         <p>{project.description}</p>
-        <Image src={project.image.url} width={350} height={200} alt={project.image.name} />
       </div>
     ));
   }
   return null;
 };
 
-export const getStaticProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   try {
-    const { data } = await axios.get(`${process.env.CMS_API}/projects`);
-    data[0].image.url = `${process.env.CMS_API}${data[0].image.url}`;
-    return { props: { projects: data } };
+    const { data } = await client.query({
+      query: LOAD_PROJECTS,
+    });
+    return { props: { projects: data.projects }, revalidate: 60 };
   } catch (e) {
     return { props: {} };
   }

@@ -7,7 +7,6 @@ import Typography from '@material-ui/core/Typography';
 import * as S from '../../style/sharedStyles.style';
 import { GetServerSideProps } from 'next';
 import { useSignIn } from '@hooks/useSignIn';
-import { IUser } from '@db/user/user.types';
 import { routes } from '@constants/routes';
 import * as Yup from 'yup';
 import { emailValidation } from '@utils/validations/email';
@@ -18,7 +17,7 @@ import { isAxiosErrorMessage } from '@utils/typeGuards';
 const Register = () => {
   const handleLogin = useSignIn();
 
-  const handleSubmit = async (body: IUser) => {
+  const handleSubmit = async (body: User) => {
     try {
       await axios.post('/api/auth/signup', body);
       await handleLogin(body);

@@ -1,15 +1,21 @@
-import axios from 'axios';
+import { useQuery } from '@apollo/client';
+import { GET_PROJECTS_IDS } from 'GraphQl/queries/user';
 
 const Projects = () => {
-  return <div>projects</div>;
-};
-
-export const getServerSideProps = async () => {
-  try {
-    const { data } = await axios.get(`${process.env.CMS_API}/projects?status="in-progress"`);
-    return { props: { projects: data } };
-  } catch (e) {
-    return { props: {} };
+  const { data, loading } = useQuery<{ me: { projects: Project[] } }>(GET_PROJECTS_IDS);
+  if (loading) {
+    return <div>Loading</div>;
   }
+
+  if (!data?.me.projects?.length) {
+    return <div>No projects yet</div>;
+  }
+
+  return data.me.projects.map(({ id, title, description }) => (
+    <div key={id}>
+      <h3>{title}</h3>
+      <p>{description}</p>
+    </div>
+  ));
 };
 export default Projects;
