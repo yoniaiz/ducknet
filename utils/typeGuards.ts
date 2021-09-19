@@ -1,6 +1,6 @@
 import { AxiosError } from 'axios';
 
-export function isAxiosErrorMessage(e: unknown): e is AxiosError<{ message: string }> {
+export function isAxiosErrorMessage<T = string>(e: unknown): e is AxiosError<{ message: T }> {
   return (e as AxiosError<{ message: string }>)?.response?.data?.message !== undefined;
 }
 

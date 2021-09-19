@@ -1,13 +1,12 @@
-import axios from 'axios';
 import { getSession } from 'next-auth/client';
 import { Formik } from 'formik';
 import ControlledInput from '@ui/ControlledInput';
+import axios from 'axios';
 import Button from '@ui/button';
 import Typography from '@material-ui/core/Typography';
 import * as S from '../../style/sharedStyles.style';
 import { GetServerSideProps } from 'next';
 import { useSignIn } from '@hooks/useSignIn';
-import { IUser } from '@db/user/user.types';
 import { routes } from '@constants/routes';
 import * as Yup from 'yup';
 import { emailValidation } from '@utils/validations/email';
@@ -18,7 +17,7 @@ import { isAxiosErrorMessage } from '@utils/typeGuards';
 const Register = () => {
   const handleLogin = useSignIn();
 
-  const handleSubmit = async (body: IUser) => {
+  const handleSubmit = async (body: User) => {
     try {
       await axios.post('/api/auth/signup', body);
       await handleLogin(body);
@@ -37,13 +36,12 @@ const Register = () => {
         </Typography>
 
         <Formik
-          initialValues={{ email: '', password: '', firstName: '', lastName: '' }}
+          initialValues={{ email: '', password: '', username: '' }}
           onSubmit={handleSubmit}
           validationSchema={Yup.object().shape({
             email: emailValidation,
             password: passwordValidation,
-            firstName: Yup.string().required().min(2),
-            lastName: Yup.string().required().min(2),
+            username: Yup.string().required().min(2),
           })}
         >
           {(props) => {
@@ -51,16 +49,9 @@ const Register = () => {
               <S.FormContainer>
                 <ControlledInput
                   required
-                  id="firstName"
-                  name="firstName"
-                  label="First name"
-                  fullWidth
-                />
-                <ControlledInput
-                  required
-                  id="lastName"
-                  name="lastName"
-                  label="Last name"
+                  id="username"
+                  name="username"
+                  label="Username"
                   fullWidth
                 />
                 <ControlledInput

@@ -7,30 +7,34 @@ import { theme, GlobalStyle } from '@style';
 import Layout from '@components/layout';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
+import { ApolloProvider } from '@apollo/client';
+import client from '@utils/apollo-client';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <AuthProvider session={pageProps.session}>
-      <StylesProvider injectFirst>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <GlobalStyle />
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
-          <ToastContainer
-            position="top-left"
-            autoClose={5000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            pauseOnHover
-          />
-        </ThemeProvider>
-      </StylesProvider>
-    </AuthProvider>
+    <ApolloProvider client={client}>
+      <AuthProvider session={pageProps.session}>
+        <StylesProvider injectFirst>
+          <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <GlobalStyle />
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
+            <ToastContainer
+              position="top-left"
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              pauseOnHover
+            />
+          </ThemeProvider>
+        </StylesProvider>
+      </AuthProvider>
+    </ApolloProvider>
   );
 }
 

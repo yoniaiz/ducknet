@@ -6,8 +6,7 @@ describe('Register', () => {
     const user = buildUser();
 
     cy.visit('/register');
-    cy.findByLabelText(/first name/i).type(user.firstName);
-    cy.findByLabelText(/last name/i).type(user.lastName);
+    cy.findByLabelText(/username/i).type(user.username);
     cy.findByLabelText(/email/i).type(user.email);
     cy.findByLabelText(/password/i).type(user.password);
 

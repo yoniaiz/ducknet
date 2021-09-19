@@ -1,6 +1,5 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable @typescript-eslint/no-namespace */
-import { IUser } from '@db/user/user.types';
 import { signIn } from 'next-auth/client';
 import { buildUser } from './generate';
 
@@ -24,14 +23,14 @@ declare global {
         cy.createUser()
        ```
        */
-      createUser: (overrides?: Partial<IUser>) => Cypress.Chainable<IUser>;
+      createUser: (overrides?: Partial<User>) => Cypress.Chainable<User>;
 
-      loginNewUser: (overrides?: Partial<IUser>) => void;
+      loginNewUser: (overrides?: Partial<User>) => void;
     }
   }
 }
 
-Cypress.Commands.add('createUser', (overrides?: Partial<IUser>) => {
+Cypress.Commands.add('createUser', (overrides?: Partial<User>) => {
   const user = buildUser(overrides);
   cy.request({
     url: '/api/auth/signup',
@@ -40,7 +39,7 @@ Cypress.Commands.add('createUser', (overrides?: Partial<IUser>) => {
   }).then((response) => ({ ...response.body, ...user }));
 });
 
-Cypress.Commands.add('loginNewUser', (overrides?: Partial<IUser>) => {
+Cypress.Commands.add('loginNewUser', (overrides?: Partial<User>) => {
   cy.createUser(overrides).then(async (user) => {
     await signIn('credentials', {
       redirect: false,
