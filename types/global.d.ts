@@ -7,7 +7,8 @@ interface Project {
   id: string;
   title: string;
   description: string;
-  image: IImage;
+  image: Image;
+  status?: 'inProgress' | 'completed' | 'saved';
 }
 
 interface User {

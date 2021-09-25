@@ -7,6 +7,8 @@ export const Container = styled.div`
 
 export const Main = styled.main<{ fullHeight: number }>`
   height: calc(${({ fullHeight }) => fullHeight}px - ${NAV_HEIGHT}rem);
+  overflow-y: auto;
+  overflow-x: hidden;
   width: calc(100vw - 22.4rem);
   padding: 4.8rem 22.4rem 3rem 6.7rem;
 

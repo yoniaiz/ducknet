@@ -11,6 +11,12 @@ const SideBar = () => {
         <li>
           <Link href="/projects/find-projects">find projects</Link>
         </li>
+        <li>
+          <Link href="/projects/saved">saved projects</Link>
+        </li>
+        <li>
+          <Link href="/projects/completed">completed projects</Link>
+        </li>
       </ul>
     </S.SideBar>
   );
