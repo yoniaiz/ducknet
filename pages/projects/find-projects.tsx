@@ -9,10 +9,11 @@ interface Props {
 
 const FindProjects = ({ projects }: Props) => {
   const { data } = useQuery<{ projects: Projects[] }>(PROJECTS);
+
   const allProjects = data?.projects || projects;
 
   if (allProjects?.length) {
-    return projects.map((project) => (
+    return allProjects.map((project) => (
       <div key={project.id}>
         <h3>{project.title}</h3>
         <p>{project.description}</p>

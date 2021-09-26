@@ -6,7 +6,6 @@ export const PROJECTS = gql`
       id
       title
       description
-      status
     }
   }
 `;
