@@ -39,9 +39,8 @@ const Login = () => {
                   type="password"
                   fullWidth
                 />
-
                 <Button
-                  disabled={!props.dirty || !props.isValid}
+                  disabled={!props.dirty || !props.isValid || !props.isValidating}
                   isLoading={props.isSubmitting}
                   type="button"
                   onClick={props.submitForm}

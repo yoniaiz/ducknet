@@ -38,13 +38,6 @@
       "@db/*": ["db/*"]
     }
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    "lib/connectMongoDb.ts",
-    "jest.setup.js",
-    "utils/test-utils/connectTestMongoDb.js"
-  ],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "./test/jest.setup.ts"],
   "exclude": ["node_modules"]
 }
