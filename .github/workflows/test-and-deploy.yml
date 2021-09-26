@@ -16,5 +16,5 @@ jobs:
       - name: run server&client integration + unit tests
         run: npm run test
       - name: Upload coverage to Codecov
-        uses: npx codecov@2
-        with: token ${{ secrets.CODECOV_TOKEN }}
+        uses: codecov/codecov-action@v2
+        with: ${{ secrets.CODECOV_TOKEN }}
