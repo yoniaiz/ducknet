@@ -1,6 +1,6 @@
 module.exports = {
   client: {
-    service: 'ducknet',
+    localSchemaFile: './graphql.schema.json',
     includes: ['./GraphQl/queries/*', './GraphQl/mutations/*'],
   },
 };
