@@ -1,10 +1,10 @@
 /* eslint-disable no-unused-vars */
-export type Maybe<T> = T | null;
-export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
+type Maybe<T> = T | null;
+type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
+type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
+type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
 /** All built-in and custom scalars, mapped to their actual values */
-export type Scalars = {
+type Scalars = {
   ID: string;
   String: string;
   Boolean: boolean;
@@ -24,7 +24,7 @@ export type Scalars = {
   Upload: unknown;
 };
 
-export type AdminUser = {
+type AdminUser = {
   __typename?: 'AdminUser';
   firstname: Scalars['String'];
   id: Scalars['ID'];
@@ -32,19 +32,19 @@ export type AdminUser = {
   username?: Maybe<Scalars['String']>;
 };
 
-export enum Enum_Projects_Status {
+enum Enum_Projects_Status {
   Completed = 'completed',
   InProgress = 'inProgress',
   Saved = 'saved',
 }
 
-export type FileInfoInput = {
+type FileInfoInput = {
   alternativeText?: Maybe<Scalars['String']>;
   caption?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
 };
 
-export type FileInput = {
+type FileInput = {
   alternativeText?: Maybe<Scalars['String']>;
   caption?: Maybe<Scalars['String']>;
   created_by?: Maybe<Scalars['ID']>;
@@ -64,7 +64,7 @@ export type FileInput = {
   width?: Maybe<Scalars['Int']>;
 };
 
-export type Group = {
+type Group = {
   __typename?: 'Group';
   _id: Scalars['ID'];
   createdAt: Scalars['DateTime'];
@@ -77,76 +77,76 @@ export type Group = {
   users_permissions_users?: Maybe<Array<Maybe<UsersPermissionsUser>>>;
 };
 
-export type GroupProjectsArgs = {
+type GroupProjectsArgs = {
   limit?: Maybe<Scalars['Int']>;
   sort?: Maybe<Scalars['String']>;
   start?: Maybe<Scalars['Int']>;
   where?: Maybe<Scalars['JSON']>;
 };
 
-export type GroupUsers_Permissions_UsersArgs = {
+type GroupUsers_Permissions_UsersArgs = {
   limit?: Maybe<Scalars['Int']>;
   sort?: Maybe<Scalars['String']>;
   start?: Maybe<Scalars['Int']>;
   where?: Maybe<Scalars['JSON']>;
 };
 
-export type GroupAggregator = {
+type GroupAggregator = {
   __typename?: 'GroupAggregator';
   count?: Maybe<Scalars['Int']>;
   totalCount?: Maybe<Scalars['Int']>;
 };
 
-export type GroupConnection = {
+type GroupConnection = {
   __typename?: 'GroupConnection';
   aggregate?: Maybe<GroupAggregator>;
   groupBy?: Maybe<GroupGroupBy>;
   values?: Maybe<Array<Maybe<Group>>>;
 };
 
-export type GroupConnectionCreatedAt = {
+type GroupConnectionCreatedAt = {
   __typename?: 'GroupConnectionCreatedAt';
   connection?: Maybe<GroupConnection>;
   key?: Maybe<Scalars['DateTime']>;
 };
 
-export type GroupConnectionId = {
+type GroupConnectionId = {
   __typename?: 'GroupConnectionId';
   connection?: Maybe<GroupConnection>;
   key?: Maybe<Scalars['ID']>;
 };
 
-export type GroupConnectionProject = {
+type GroupConnectionProject = {
   __typename?: 'GroupConnectionProject';
   connection?: Maybe<GroupConnection>;
   key?: Maybe<Scalars['ID']>;
 };
 
-export type GroupConnectionPublished_At = {
+type GroupConnectionPublished_At = {
   __typename?: 'GroupConnectionPublished_at';
   connection?: Maybe<GroupConnection>;
   key?: Maybe<Scalars['DateTime']>;
 };
 
-export type GroupConnectionTitle = {
+type GroupConnectionTitle = {
   __typename?: 'GroupConnectionTitle';
   connection?: Maybe<GroupConnection>;
   key?: Maybe<Scalars['String']>;
 };
 
-export type GroupConnectionUpdatedAt = {
+type GroupConnectionUpdatedAt = {
   __typename?: 'GroupConnectionUpdatedAt';
   connection?: Maybe<GroupConnection>;
   key?: Maybe<Scalars['DateTime']>;
 };
 
-export type GroupConnection_Id = {
+type GroupConnection_Id = {
   __typename?: 'GroupConnection_id';
   connection?: Maybe<GroupConnection>;
   key?: Maybe<Scalars['ID']>;
 };
 
-export type GroupGroupBy = {
+type GroupGroupBy = {
   __typename?: 'GroupGroupBy';
   _id?: Maybe<Array<Maybe<GroupConnection_Id>>>;
   createdAt?: Maybe<Array<Maybe<GroupConnectionCreatedAt>>>;
@@ -157,7 +157,7 @@ export type GroupGroupBy = {
   updatedAt?: Maybe<Array<Maybe<GroupConnectionUpdatedAt>>>;
 };
 
-export type GroupInput = {
+type GroupInput = {
   created_by?: Maybe<Scalars['ID']>;
   project?: Maybe<Scalars['ID']>;
   projects?: Maybe<Array<Maybe<Scalars['ID']>>>;
@@ -167,7 +167,7 @@ export type GroupInput = {
   users_permissions_users?: Maybe<Array<Maybe<Scalars['ID']>>>;
 };
 
-export type I18NLocale = {
+type I18NLocale = {
   __typename?: 'I18NLocale';
   _id: Scalars['ID'];
   code?: Maybe<Scalars['String']>;
@@ -177,18 +177,18 @@ export type I18NLocale = {
   updatedAt: Scalars['DateTime'];
 };
 
-export type InputId = {
+type InputId = {
   id: Scalars['ID'];
 };
 
-export type LocaleInput = {
+type LocaleInput = {
   code?: Maybe<Scalars['String']>;
   created_by?: Maybe<Scalars['ID']>;
   name?: Maybe<Scalars['String']>;
   updated_by?: Maybe<Scalars['ID']>;
 };
 
-export type Morph =
+type Morph =
   | Group
   | GroupAggregator
   | GroupConnection
@@ -313,7 +313,7 @@ export type Morph =
   | UpdateTechnologyPayload
   | UpdateUserPayload;
 
-export type Mutation = {
+type Mutation = {
   __typename?: 'Mutation';
   createGroup?: Maybe<CreateGroupPayload>;
   createProject?: Maybe<CreateProjectPayload>;
@@ -351,71 +351,71 @@ export type Mutation = {
   upload: UploadFile;
 };
 
-export type MutationCreateGroupArgs = {
+type MutationCreateGroupArgs = {
   input?: Maybe<CreateGroupInput>;
 };
 
-export type MutationCreateProjectArgs = {
+type MutationCreateProjectArgs = {
   input?: Maybe<CreateProjectInput>;
 };
 
-export type MutationCreateProjectsInProgressArgs = {
+type MutationCreateProjectsInProgressArgs = {
   input?: Maybe<CreateProjectsInProgressInput>;
 };
 
-export type MutationCreateRoleArgs = {
+type MutationCreateRoleArgs = {
   input?: Maybe<CreateRoleInput>;
 };
 
-export type MutationCreateTechnologyArgs = {
+type MutationCreateTechnologyArgs = {
   input?: Maybe<CreateTechnologyInput>;
 };
 
-export type MutationCreateUserArgs = {
+type MutationCreateUserArgs = {
   input?: Maybe<CreateUserInput>;
 };
 
-export type MutationDeleteFileArgs = {
+type MutationDeleteFileArgs = {
   input?: Maybe<DeleteFileInput>;
 };
 
-export type MutationDeleteGroupArgs = {
+type MutationDeleteGroupArgs = {
   input?: Maybe<DeleteGroupInput>;
 };
 
-export type MutationDeleteProjectArgs = {
+type MutationDeleteProjectArgs = {
   input?: Maybe<DeleteProjectInput>;
 };
 
-export type MutationDeleteProjectsInProgressArgs = {
+type MutationDeleteProjectsInProgressArgs = {
   input?: Maybe<DeleteProjectsInProgressInput>;
 };
 
-export type MutationDeleteRoleArgs = {
+type MutationDeleteRoleArgs = {
   input?: Maybe<DeleteRoleInput>;
 };
 
-export type MutationDeleteTechnologyArgs = {
+type MutationDeleteTechnologyArgs = {
   input?: Maybe<DeleteTechnologyInput>;
 };
 
-export type MutationDeleteUserArgs = {
+type MutationDeleteUserArgs = {
   input?: Maybe<DeleteUserInput>;
 };
 
-export type MutationEmailConfirmationArgs = {
+type MutationEmailConfirmationArgs = {
   confirmation: Scalars['String'];
 };
 
-export type MutationForgotPasswordArgs = {
+type MutationForgotPasswordArgs = {
   email: Scalars['String'];
 };
 
-export type MutationLoginArgs = {
+type MutationLoginArgs = {
   input: UsersPermissionsLoginInput;
 };
 
-export type MutationMultipleUploadArgs = {
+type MutationMultipleUploadArgs = {
   field?: Maybe<Scalars['String']>;
   files: Array<Maybe<Scalars['Upload']>>;
   ref?: Maybe<Scalars['String']>;
@@ -423,46 +423,46 @@ export type MutationMultipleUploadArgs = {
   source?: Maybe<Scalars['String']>;
 };
 
-export type MutationRegisterArgs = {
+type MutationRegisterArgs = {
   input: UsersPermissionsRegisterInput;
 };
 
-export type MutationResetPasswordArgs = {
+type MutationResetPasswordArgs = {
   code: Scalars['String'];
   password: Scalars['String'];
   passwordConfirmation: Scalars['String'];
 };
 
-export type MutationUpdateFileInfoArgs = {
+type MutationUpdateFileInfoArgs = {
   id: Scalars['ID'];
   info: FileInfoInput;
 };
 
-export type MutationUpdateGroupArgs = {
+type MutationUpdateGroupArgs = {
   input?: Maybe<UpdateGroupInput>;
 };
 
-export type MutationUpdateProjectArgs = {
+type MutationUpdateProjectArgs = {
   input?: Maybe<UpdateProjectInput>;
 };
 
-export type MutationUpdateProjectsInProgressArgs = {
+type MutationUpdateProjectsInProgressArgs = {
   input?: Maybe<UpdateProjectsInProgressInput>;
 };
 
-export type MutationUpdateRoleArgs = {
+type MutationUpdateRoleArgs = {
   input?: Maybe<UpdateRoleInput>;
 };
 
-export type MutationUpdateTechnologyArgs = {
+type MutationUpdateTechnologyArgs = {
   input?: Maybe<UpdateTechnologyInput>;
 };
 
-export type MutationUpdateUserArgs = {
+type MutationUpdateUserArgs = {
   input?: Maybe<UpdateUserInput>;
 };
 
-export type MutationUploadArgs = {
+type MutationUploadArgs = {
   field?: Maybe<Scalars['String']>;
   file: Scalars['Upload'];
   info?: Maybe<FileInfoInput>;
@@ -471,7 +471,7 @@ export type MutationUploadArgs = {
   source?: Maybe<Scalars['String']>;
 };
 
-export type Project = {
+type Project = {
   __typename?: 'Project';
   description: Scalars['String'];
   id: Scalars['ID'];
@@ -479,7 +479,7 @@ export type Project = {
   title: Scalars['String'];
 };
 
-export type ProjectInput = {
+type ProjectInput = {
   created_by?: Maybe<Scalars['ID']>;
   description?: Maybe<Scalars['String']>;
   group?: Maybe<Scalars['ID']>;
@@ -492,13 +492,13 @@ export type ProjectInput = {
   users?: Maybe<Array<Maybe<Scalars['ID']>>>;
 };
 
-export enum ProjectStatus {
+enum ProjectStatus {
   Completed = 'completed',
   InProgress = 'inProgress',
   Saved = 'saved',
 }
 
-export type Projects = {
+type Projects = {
   __typename?: 'Projects';
   _id: Scalars['ID'];
   createdAt: Scalars['DateTime'];
@@ -514,94 +514,94 @@ export type Projects = {
   users?: Maybe<Array<Maybe<UsersPermissionsUser>>>;
 };
 
-export type ProjectsTechnologiesArgs = {
+type ProjectsTechnologiesArgs = {
   limit?: Maybe<Scalars['Int']>;
   sort?: Maybe<Scalars['String']>;
   start?: Maybe<Scalars['Int']>;
   where?: Maybe<Scalars['JSON']>;
 };
 
-export type ProjectsUsersArgs = {
+type ProjectsUsersArgs = {
   limit?: Maybe<Scalars['Int']>;
   sort?: Maybe<Scalars['String']>;
   start?: Maybe<Scalars['Int']>;
   where?: Maybe<Scalars['JSON']>;
 };
 
-export type ProjectsAggregator = {
+type ProjectsAggregator = {
   __typename?: 'ProjectsAggregator';
   count?: Maybe<Scalars['Int']>;
   totalCount?: Maybe<Scalars['Int']>;
 };
 
-export type ProjectsConnection = {
+type ProjectsConnection = {
   __typename?: 'ProjectsConnection';
   aggregate?: Maybe<ProjectsAggregator>;
   groupBy?: Maybe<ProjectsGroupBy>;
   values?: Maybe<Array<Maybe<Projects>>>;
 };
 
-export type ProjectsConnectionCreatedAt = {
+type ProjectsConnectionCreatedAt = {
   __typename?: 'ProjectsConnectionCreatedAt';
   connection?: Maybe<ProjectsConnection>;
   key?: Maybe<Scalars['DateTime']>;
 };
 
-export type ProjectsConnectionDescription = {
+type ProjectsConnectionDescription = {
   __typename?: 'ProjectsConnectionDescription';
   connection?: Maybe<ProjectsConnection>;
   key?: Maybe<Scalars['String']>;
 };
 
-export type ProjectsConnectionGroup = {
+type ProjectsConnectionGroup = {
   __typename?: 'ProjectsConnectionGroup';
   connection?: Maybe<ProjectsConnection>;
   key?: Maybe<Scalars['ID']>;
 };
 
-export type ProjectsConnectionId = {
+type ProjectsConnectionId = {
   __typename?: 'ProjectsConnectionId';
   connection?: Maybe<ProjectsConnection>;
   key?: Maybe<Scalars['ID']>;
 };
 
-export type ProjectsConnectionImage = {
+type ProjectsConnectionImage = {
   __typename?: 'ProjectsConnectionImage';
   connection?: Maybe<ProjectsConnection>;
   key?: Maybe<Scalars['ID']>;
 };
 
-export type ProjectsConnectionPublished_At = {
+type ProjectsConnectionPublished_At = {
   __typename?: 'ProjectsConnectionPublished_at';
   connection?: Maybe<ProjectsConnection>;
   key?: Maybe<Scalars['DateTime']>;
 };
 
-export type ProjectsConnectionStatus = {
+type ProjectsConnectionStatus = {
   __typename?: 'ProjectsConnectionStatus';
   connection?: Maybe<ProjectsConnection>;
   key?: Maybe<Scalars['String']>;
 };
 
-export type ProjectsConnectionTitle = {
+type ProjectsConnectionTitle = {
   __typename?: 'ProjectsConnectionTitle';
   connection?: Maybe<ProjectsConnection>;
   key?: Maybe<Scalars['String']>;
 };
 
-export type ProjectsConnectionUpdatedAt = {
+type ProjectsConnectionUpdatedAt = {
   __typename?: 'ProjectsConnectionUpdatedAt';
   connection?: Maybe<ProjectsConnection>;
   key?: Maybe<Scalars['DateTime']>;
 };
 
-export type ProjectsConnection_Id = {
+type ProjectsConnection_Id = {
   __typename?: 'ProjectsConnection_id';
   connection?: Maybe<ProjectsConnection>;
   key?: Maybe<Scalars['ID']>;
 };
 
-export type ProjectsGroupBy = {
+type ProjectsGroupBy = {
   __typename?: 'ProjectsGroupBy';
   _id?: Maybe<Array<Maybe<ProjectsConnection_Id>>>;
   createdAt?: Maybe<Array<Maybe<ProjectsConnectionCreatedAt>>>;
@@ -615,7 +615,7 @@ export type ProjectsGroupBy = {
   updatedAt?: Maybe<Array<Maybe<ProjectsConnectionUpdatedAt>>>;
 };
 
-export type ProjectsInProgress = {
+type ProjectsInProgress = {
   __typename?: 'ProjectsInProgress';
   _id: Scalars['ID'];
   createdAt: Scalars['DateTime'];
@@ -624,50 +624,50 @@ export type ProjectsInProgress = {
   updatedAt: Scalars['DateTime'];
 };
 
-export type ProjectsInProgressAggregator = {
+type ProjectsInProgressAggregator = {
   __typename?: 'ProjectsInProgressAggregator';
   count?: Maybe<Scalars['Int']>;
   totalCount?: Maybe<Scalars['Int']>;
 };
 
-export type ProjectsInProgressConnection = {
+type ProjectsInProgressConnection = {
   __typename?: 'ProjectsInProgressConnection';
   aggregate?: Maybe<ProjectsInProgressAggregator>;
   groupBy?: Maybe<ProjectsInProgressGroupBy>;
   values?: Maybe<Array<Maybe<ProjectsInProgress>>>;
 };
 
-export type ProjectsInProgressConnectionCreatedAt = {
+type ProjectsInProgressConnectionCreatedAt = {
   __typename?: 'ProjectsInProgressConnectionCreatedAt';
   connection?: Maybe<ProjectsInProgressConnection>;
   key?: Maybe<Scalars['DateTime']>;
 };
 
-export type ProjectsInProgressConnectionId = {
+type ProjectsInProgressConnectionId = {
   __typename?: 'ProjectsInProgressConnectionId';
   connection?: Maybe<ProjectsInProgressConnection>;
   key?: Maybe<Scalars['ID']>;
 };
 
-export type ProjectsInProgressConnectionPublished_At = {
+type ProjectsInProgressConnectionPublished_At = {
   __typename?: 'ProjectsInProgressConnectionPublished_at';
   connection?: Maybe<ProjectsInProgressConnection>;
   key?: Maybe<Scalars['DateTime']>;
 };
 
-export type ProjectsInProgressConnectionUpdatedAt = {
+type ProjectsInProgressConnectionUpdatedAt = {
   __typename?: 'ProjectsInProgressConnectionUpdatedAt';
   connection?: Maybe<ProjectsInProgressConnection>;
   key?: Maybe<Scalars['DateTime']>;
 };
 
-export type ProjectsInProgressConnection_Id = {
+type ProjectsInProgressConnection_Id = {
   __typename?: 'ProjectsInProgressConnection_id';
   connection?: Maybe<ProjectsInProgressConnection>;
   key?: Maybe<Scalars['ID']>;
 };
 
-export type ProjectsInProgressGroupBy = {
+type ProjectsInProgressGroupBy = {
   __typename?: 'ProjectsInProgressGroupBy';
   _id?: Maybe<Array<Maybe<ProjectsInProgressConnection_Id>>>;
   createdAt?: Maybe<Array<Maybe<ProjectsInProgressConnectionCreatedAt>>>;
@@ -676,18 +676,18 @@ export type ProjectsInProgressGroupBy = {
   updatedAt?: Maybe<Array<Maybe<ProjectsInProgressConnectionUpdatedAt>>>;
 };
 
-export type ProjectsInProgressInput = {
+type ProjectsInProgressInput = {
   created_by?: Maybe<Scalars['ID']>;
   published_at?: Maybe<Scalars['DateTime']>;
   updated_by?: Maybe<Scalars['ID']>;
 };
 
-export enum PublicationState {
+enum PublicationState {
   Live = 'LIVE',
   Preview = 'PREVIEW',
 }
 
-export type Query = {
+type Query = {
   __typename?: 'Query';
   files?: Maybe<Array<Maybe<UploadFile>>>;
   filesConnection?: Maybe<UploadFileConnection>;
@@ -714,7 +714,7 @@ export type Query = {
   usersConnection?: Maybe<UsersPermissionsUserConnection>;
 };
 
-export type QueryFilesArgs = {
+type QueryFilesArgs = {
   limit?: Maybe<Scalars['Int']>;
   publicationState?: Maybe<PublicationState>;
   sort?: Maybe<Scalars['String']>;
@@ -722,19 +722,19 @@ export type QueryFilesArgs = {
   where?: Maybe<Scalars['JSON']>;
 };
 
-export type QueryFilesConnectionArgs = {
+type QueryFilesConnectionArgs = {
   limit?: Maybe<Scalars['Int']>;
   sort?: Maybe<Scalars['String']>;
   start?: Maybe<Scalars['Int']>;
   where?: Maybe<Scalars['JSON']>;
 };
 
-export type QueryGroupArgs = {
+type QueryGroupArgs = {
   id: Scalars['ID'];
   publicationState?: Maybe<PublicationState>;
 };
 
-export type QueryGroupsArgs = {
+type QueryGroupsArgs = {
   limit?: Maybe<Scalars['Int']>;
   publicationState?: Maybe<PublicationState>;
   sort?: Maybe<Scalars['String']>;
@@ -742,19 +742,19 @@ export type QueryGroupsArgs = {
   where?: Maybe<Scalars['JSON']>;
 };
 
-export type QueryGroupsConnectionArgs = {
+type QueryGroupsConnectionArgs = {
   limit?: Maybe<Scalars['Int']>;
   sort?: Maybe<Scalars['String']>;
   start?: Maybe<Scalars['Int']>;
   where?: Maybe<Scalars['JSON']>;
 };
 
-export type QueryProjectArgs = {
+type QueryProjectArgs = {
   id: Scalars['ID'];
   publicationState?: Maybe<PublicationState>;
 };
 
-export type QueryProjectsArgs = {
+type QueryProjectsArgs = {
   limit?: Maybe<Scalars['Int']>;
   publicationState?: Maybe<PublicationState>;
   sort?: Maybe<Scalars['String']>;
@@ -762,19 +762,19 @@ export type QueryProjectsArgs = {
   where?: Maybe<Scalars['JSON']>;
 };
 
-export type QueryProjectsConnectionArgs = {
+type QueryProjectsConnectionArgs = {
   limit?: Maybe<Scalars['Int']>;
   sort?: Maybe<Scalars['String']>;
   start?: Maybe<Scalars['Int']>;
   where?: Maybe<Scalars['JSON']>;
 };
 
-export type QueryProjectsInProgressArgs = {
+type QueryProjectsInProgressArgs = {
   id: Scalars['ID'];
   publicationState?: Maybe<PublicationState>;
 };
 
-export type QueryProjectsInProgressesArgs = {
+type QueryProjectsInProgressesArgs = {
   limit?: Maybe<Scalars['Int']>;
   publicationState?: Maybe<PublicationState>;
   sort?: Maybe<Scalars['String']>;
@@ -782,19 +782,19 @@ export type QueryProjectsInProgressesArgs = {
   where?: Maybe<Scalars['JSON']>;
 };
 
-export type QueryProjectsInProgressesConnectionArgs = {
+type QueryProjectsInProgressesConnectionArgs = {
   limit?: Maybe<Scalars['Int']>;
   sort?: Maybe<Scalars['String']>;
   start?: Maybe<Scalars['Int']>;
   where?: Maybe<Scalars['JSON']>;
 };
 
-export type QueryRoleArgs = {
+type QueryRoleArgs = {
   id: Scalars['ID'];
   publicationState?: Maybe<PublicationState>;
 };
 
-export type QueryRolesArgs = {
+type QueryRolesArgs = {
   limit?: Maybe<Scalars['Int']>;
   publicationState?: Maybe<PublicationState>;
   sort?: Maybe<Scalars['String']>;
@@ -802,14 +802,14 @@ export type QueryRolesArgs = {
   where?: Maybe<Scalars['JSON']>;
 };
 
-export type QueryRolesConnectionArgs = {
+type QueryRolesConnectionArgs = {
   limit?: Maybe<Scalars['Int']>;
   sort?: Maybe<Scalars['String']>;
   start?: Maybe<Scalars['Int']>;
   where?: Maybe<Scalars['JSON']>;
 };
 
-export type QueryTechnologiesArgs = {
+type QueryTechnologiesArgs = {
   limit?: Maybe<Scalars['Int']>;
   publicationState?: Maybe<PublicationState>;
   sort?: Maybe<Scalars['String']>;
@@ -817,28 +817,28 @@ export type QueryTechnologiesArgs = {
   where?: Maybe<Scalars['JSON']>;
 };
 
-export type QueryTechnologiesConnectionArgs = {
+type QueryTechnologiesConnectionArgs = {
   limit?: Maybe<Scalars['Int']>;
   sort?: Maybe<Scalars['String']>;
   start?: Maybe<Scalars['Int']>;
   where?: Maybe<Scalars['JSON']>;
 };
 
-export type QueryTechnologyArgs = {
+type QueryTechnologyArgs = {
   id: Scalars['ID'];
   publicationState?: Maybe<PublicationState>;
 };
 
-export type QueryUserArgs = {
+type QueryUserArgs = {
   id: Scalars['ID'];
   publicationState?: Maybe<PublicationState>;
 };
 
-export type QueryUserProjectsByStatusArgs = {
+type QueryUserProjectsByStatusArgs = {
   status?: Maybe<Scalars['String']>;
 };
 
-export type QueryUsersArgs = {
+type QueryUsersArgs = {
   limit?: Maybe<Scalars['Int']>;
   publicationState?: Maybe<PublicationState>;
   sort?: Maybe<Scalars['String']>;
@@ -846,14 +846,14 @@ export type QueryUsersArgs = {
   where?: Maybe<Scalars['JSON']>;
 };
 
-export type QueryUsersConnectionArgs = {
+type QueryUsersConnectionArgs = {
   limit?: Maybe<Scalars['Int']>;
   sort?: Maybe<Scalars['String']>;
   start?: Maybe<Scalars['Int']>;
   where?: Maybe<Scalars['JSON']>;
 };
 
-export type RoleInput = {
+type RoleInput = {
   created_by?: Maybe<Scalars['ID']>;
   description?: Maybe<Scalars['String']>;
   name: Scalars['String'];
@@ -863,7 +863,7 @@ export type RoleInput = {
   users?: Maybe<Array<Maybe<Scalars['ID']>>>;
 };
 
-export type Technologies = {
+type Technologies = {
   __typename?: 'Technologies';
   _id: Scalars['ID'];
   createdAt: Scalars['DateTime'];
@@ -877,82 +877,82 @@ export type Technologies = {
   users_permissions_users?: Maybe<Array<Maybe<UsersPermissionsUser>>>;
 };
 
-export type TechnologiesProjectsArgs = {
+type TechnologiesProjectsArgs = {
   limit?: Maybe<Scalars['Int']>;
   sort?: Maybe<Scalars['String']>;
   start?: Maybe<Scalars['Int']>;
   where?: Maybe<Scalars['JSON']>;
 };
 
-export type TechnologiesUsers_Permissions_UsersArgs = {
+type TechnologiesUsers_Permissions_UsersArgs = {
   limit?: Maybe<Scalars['Int']>;
   sort?: Maybe<Scalars['String']>;
   start?: Maybe<Scalars['Int']>;
   where?: Maybe<Scalars['JSON']>;
 };
 
-export type TechnologiesAggregator = {
+type TechnologiesAggregator = {
   __typename?: 'TechnologiesAggregator';
   count?: Maybe<Scalars['Int']>;
   totalCount?: Maybe<Scalars['Int']>;
 };
 
-export type TechnologiesConnection = {
+type TechnologiesConnection = {
   __typename?: 'TechnologiesConnection';
   aggregate?: Maybe<TechnologiesAggregator>;
   groupBy?: Maybe<TechnologiesGroupBy>;
   values?: Maybe<Array<Maybe<Technologies>>>;
 };
 
-export type TechnologiesConnectionCreatedAt = {
+type TechnologiesConnectionCreatedAt = {
   __typename?: 'TechnologiesConnectionCreatedAt';
   connection?: Maybe<TechnologiesConnection>;
   key?: Maybe<Scalars['DateTime']>;
 };
 
-export type TechnologiesConnectionDescription = {
+type TechnologiesConnectionDescription = {
   __typename?: 'TechnologiesConnectionDescription';
   connection?: Maybe<TechnologiesConnection>;
   key?: Maybe<Scalars['String']>;
 };
 
-export type TechnologiesConnectionId = {
+type TechnologiesConnectionId = {
   __typename?: 'TechnologiesConnectionId';
   connection?: Maybe<TechnologiesConnection>;
   key?: Maybe<Scalars['ID']>;
 };
 
-export type TechnologiesConnectionImage = {
+type TechnologiesConnectionImage = {
   __typename?: 'TechnologiesConnectionImage';
   connection?: Maybe<TechnologiesConnection>;
   key?: Maybe<Scalars['ID']>;
 };
 
-export type TechnologiesConnectionPublished_At = {
+type TechnologiesConnectionPublished_At = {
   __typename?: 'TechnologiesConnectionPublished_at';
   connection?: Maybe<TechnologiesConnection>;
   key?: Maybe<Scalars['DateTime']>;
 };
 
-export type TechnologiesConnectionTitle = {
+type TechnologiesConnectionTitle = {
   __typename?: 'TechnologiesConnectionTitle';
   connection?: Maybe<TechnologiesConnection>;
   key?: Maybe<Scalars['String']>;
 };
 
-export type TechnologiesConnectionUpdatedAt = {
+type TechnologiesConnectionUpdatedAt = {
   __typename?: 'TechnologiesConnectionUpdatedAt';
   connection?: Maybe<TechnologiesConnection>;
   key?: Maybe<Scalars['DateTime']>;
 };
 
-export type TechnologiesConnection_Id = {
+type TechnologiesConnection_Id = {
   __typename?: 'TechnologiesConnection_id';
   connection?: Maybe<TechnologiesConnection>;
   key?: Maybe<Scalars['ID']>;
 };
 
-export type TechnologiesGroupBy = {
+type TechnologiesGroupBy = {
   __typename?: 'TechnologiesGroupBy';
   _id?: Maybe<Array<Maybe<TechnologiesConnection_Id>>>;
   createdAt?: Maybe<Array<Maybe<TechnologiesConnectionCreatedAt>>>;
@@ -964,7 +964,7 @@ export type TechnologiesGroupBy = {
   updatedAt?: Maybe<Array<Maybe<TechnologiesConnectionUpdatedAt>>>;
 };
 
-export type TechnologyInput = {
+type TechnologyInput = {
   created_by?: Maybe<Scalars['ID']>;
   description?: Maybe<Scalars['String']>;
   image?: Maybe<Scalars['ID']>;
@@ -975,7 +975,7 @@ export type TechnologyInput = {
   users_permissions_users?: Maybe<Array<Maybe<Scalars['ID']>>>;
 };
 
-export type UploadFile = {
+type UploadFile = {
   __typename?: 'UploadFile';
   _id: Scalars['ID'];
   alternativeText?: Maybe<Scalars['String']>;
@@ -998,14 +998,14 @@ export type UploadFile = {
   width?: Maybe<Scalars['Int']>;
 };
 
-export type UploadFileRelatedArgs = {
+type UploadFileRelatedArgs = {
   limit?: Maybe<Scalars['Int']>;
   sort?: Maybe<Scalars['String']>;
   start?: Maybe<Scalars['Int']>;
   where?: Maybe<Scalars['JSON']>;
 };
 
-export type UploadFileAggregator = {
+type UploadFileAggregator = {
   __typename?: 'UploadFileAggregator';
   avg?: Maybe<UploadFileAggregatorAvg>;
   count?: Maybe<Scalars['Int']>;
@@ -1015,150 +1015,150 @@ export type UploadFileAggregator = {
   totalCount?: Maybe<Scalars['Int']>;
 };
 
-export type UploadFileAggregatorAvg = {
+type UploadFileAggregatorAvg = {
   __typename?: 'UploadFileAggregatorAvg';
   height?: Maybe<Scalars['Float']>;
   size?: Maybe<Scalars['Float']>;
   width?: Maybe<Scalars['Float']>;
 };
 
-export type UploadFileAggregatorMax = {
+type UploadFileAggregatorMax = {
   __typename?: 'UploadFileAggregatorMax';
   height?: Maybe<Scalars['Float']>;
   size?: Maybe<Scalars['Float']>;
   width?: Maybe<Scalars['Float']>;
 };
 
-export type UploadFileAggregatorMin = {
+type UploadFileAggregatorMin = {
   __typename?: 'UploadFileAggregatorMin';
   height?: Maybe<Scalars['Float']>;
   size?: Maybe<Scalars['Float']>;
   width?: Maybe<Scalars['Float']>;
 };
 
-export type UploadFileAggregatorSum = {
+type UploadFileAggregatorSum = {
   __typename?: 'UploadFileAggregatorSum';
   height?: Maybe<Scalars['Float']>;
   size?: Maybe<Scalars['Float']>;
   width?: Maybe<Scalars['Float']>;
 };
 
-export type UploadFileConnection = {
+type UploadFileConnection = {
   __typename?: 'UploadFileConnection';
   aggregate?: Maybe<UploadFileAggregator>;
   groupBy?: Maybe<UploadFileGroupBy>;
   values?: Maybe<Array<Maybe<UploadFile>>>;
 };
 
-export type UploadFileConnectionAlternativeText = {
+type UploadFileConnectionAlternativeText = {
   __typename?: 'UploadFileConnectionAlternativeText';
   connection?: Maybe<UploadFileConnection>;
   key?: Maybe<Scalars['String']>;
 };
 
-export type UploadFileConnectionCaption = {
+type UploadFileConnectionCaption = {
   __typename?: 'UploadFileConnectionCaption';
   connection?: Maybe<UploadFileConnection>;
   key?: Maybe<Scalars['String']>;
 };
 
-export type UploadFileConnectionCreatedAt = {
+type UploadFileConnectionCreatedAt = {
   __typename?: 'UploadFileConnectionCreatedAt';
   connection?: Maybe<UploadFileConnection>;
   key?: Maybe<Scalars['DateTime']>;
 };
 
-export type UploadFileConnectionExt = {
+type UploadFileConnectionExt = {
   __typename?: 'UploadFileConnectionExt';
   connection?: Maybe<UploadFileConnection>;
   key?: Maybe<Scalars['String']>;
 };
 
-export type UploadFileConnectionFormats = {
+type UploadFileConnectionFormats = {
   __typename?: 'UploadFileConnectionFormats';
   connection?: Maybe<UploadFileConnection>;
   key?: Maybe<Scalars['JSON']>;
 };
 
-export type UploadFileConnectionHash = {
+type UploadFileConnectionHash = {
   __typename?: 'UploadFileConnectionHash';
   connection?: Maybe<UploadFileConnection>;
   key?: Maybe<Scalars['String']>;
 };
 
-export type UploadFileConnectionHeight = {
+type UploadFileConnectionHeight = {
   __typename?: 'UploadFileConnectionHeight';
   connection?: Maybe<UploadFileConnection>;
   key?: Maybe<Scalars['Int']>;
 };
 
-export type UploadFileConnectionId = {
+type UploadFileConnectionId = {
   __typename?: 'UploadFileConnectionId';
   connection?: Maybe<UploadFileConnection>;
   key?: Maybe<Scalars['ID']>;
 };
 
-export type UploadFileConnectionMime = {
+type UploadFileConnectionMime = {
   __typename?: 'UploadFileConnectionMime';
   connection?: Maybe<UploadFileConnection>;
   key?: Maybe<Scalars['String']>;
 };
 
-export type UploadFileConnectionName = {
+type UploadFileConnectionName = {
   __typename?: 'UploadFileConnectionName';
   connection?: Maybe<UploadFileConnection>;
   key?: Maybe<Scalars['String']>;
 };
 
-export type UploadFileConnectionPreviewUrl = {
+type UploadFileConnectionPreviewUrl = {
   __typename?: 'UploadFileConnectionPreviewUrl';
   connection?: Maybe<UploadFileConnection>;
   key?: Maybe<Scalars['String']>;
 };
 
-export type UploadFileConnectionProvider = {
+type UploadFileConnectionProvider = {
   __typename?: 'UploadFileConnectionProvider';
   connection?: Maybe<UploadFileConnection>;
   key?: Maybe<Scalars['String']>;
 };
 
-export type UploadFileConnectionProvider_Metadata = {
+type UploadFileConnectionProvider_Metadata = {
   __typename?: 'UploadFileConnectionProvider_metadata';
   connection?: Maybe<UploadFileConnection>;
   key?: Maybe<Scalars['JSON']>;
 };
 
-export type UploadFileConnectionSize = {
+type UploadFileConnectionSize = {
   __typename?: 'UploadFileConnectionSize';
   connection?: Maybe<UploadFileConnection>;
   key?: Maybe<Scalars['Float']>;
 };
 
-export type UploadFileConnectionUpdatedAt = {
+type UploadFileConnectionUpdatedAt = {
   __typename?: 'UploadFileConnectionUpdatedAt';
   connection?: Maybe<UploadFileConnection>;
   key?: Maybe<Scalars['DateTime']>;
 };
 
-export type UploadFileConnectionUrl = {
+type UploadFileConnectionUrl = {
   __typename?: 'UploadFileConnectionUrl';
   connection?: Maybe<UploadFileConnection>;
   key?: Maybe<Scalars['String']>;
 };
 
-export type UploadFileConnectionWidth = {
+type UploadFileConnectionWidth = {
   __typename?: 'UploadFileConnectionWidth';
   connection?: Maybe<UploadFileConnection>;
   key?: Maybe<Scalars['Int']>;
 };
 
-export type UploadFileConnection_Id = {
+type UploadFileConnection_Id = {
   __typename?: 'UploadFileConnection_id';
   connection?: Maybe<UploadFileConnection>;
   key?: Maybe<Scalars['ID']>;
 };
 
-export type UploadFileGroupBy = {
+type UploadFileGroupBy = {
   __typename?: 'UploadFileGroupBy';
   _id?: Maybe<Array<Maybe<UploadFileConnection_Id>>>;
   alternativeText?: Maybe<Array<Maybe<UploadFileConnectionAlternativeText>>>;
@@ -1180,7 +1180,7 @@ export type UploadFileGroupBy = {
   width?: Maybe<Array<Maybe<UploadFileConnectionWidth>>>;
 };
 
-export type UserInput = {
+type UserInput = {
   blocked?: Maybe<Scalars['Boolean']>;
   confirmationToken?: Maybe<Scalars['String']>;
   confirmed?: Maybe<Scalars['Boolean']>;
@@ -1198,30 +1198,30 @@ export type UserInput = {
   username: Scalars['String'];
 };
 
-export type UserPermissionsPasswordPayload = {
+type UserPermissionsPasswordPayload = {
   __typename?: 'UserPermissionsPasswordPayload';
   ok: Scalars['Boolean'];
 };
 
-export type UserProjects = {
+type UserProjects = {
   __typename?: 'UserProjects';
   completed?: Maybe<Array<Maybe<Project>>>;
   inProgress?: Maybe<Array<Maybe<Project>>>;
 };
 
-export type UsersPermissionsLoginInput = {
+type UsersPermissionsLoginInput = {
   identifier: Scalars['String'];
   password: Scalars['String'];
   provider?: Maybe<Scalars['String']>;
 };
 
-export type UsersPermissionsLoginPayload = {
+type UsersPermissionsLoginPayload = {
   __typename?: 'UsersPermissionsLoginPayload';
   jwt?: Maybe<Scalars['String']>;
   user: UsersPermissionsMe;
 };
 
-export type UsersPermissionsMe = {
+type UsersPermissionsMe = {
   __typename?: 'UsersPermissionsMe';
   blocked?: Maybe<Scalars['Boolean']>;
   confirmed?: Maybe<Scalars['Boolean']>;
@@ -1233,7 +1233,7 @@ export type UsersPermissionsMe = {
   username: Scalars['String'];
 };
 
-export type UsersPermissionsMeRole = {
+type UsersPermissionsMeRole = {
   __typename?: 'UsersPermissionsMeRole';
   description?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
@@ -1241,7 +1241,7 @@ export type UsersPermissionsMeRole = {
   type?: Maybe<Scalars['String']>;
 };
 
-export type UsersPermissionsPermission = {
+type UsersPermissionsPermission = {
   __typename?: 'UsersPermissionsPermission';
   _id: Scalars['ID'];
   action: Scalars['String'];
@@ -1253,13 +1253,13 @@ export type UsersPermissionsPermission = {
   type: Scalars['String'];
 };
 
-export type UsersPermissionsRegisterInput = {
+type UsersPermissionsRegisterInput = {
   email: Scalars['String'];
   password: Scalars['String'];
   username: Scalars['String'];
 };
 
-export type UsersPermissionsRole = {
+type UsersPermissionsRole = {
   __typename?: 'UsersPermissionsRole';
   _id: Scalars['ID'];
   description?: Maybe<Scalars['String']>;
@@ -1270,64 +1270,64 @@ export type UsersPermissionsRole = {
   users?: Maybe<Array<Maybe<UsersPermissionsUser>>>;
 };
 
-export type UsersPermissionsRolePermissionsArgs = {
+type UsersPermissionsRolePermissionsArgs = {
   limit?: Maybe<Scalars['Int']>;
   sort?: Maybe<Scalars['String']>;
   start?: Maybe<Scalars['Int']>;
   where?: Maybe<Scalars['JSON']>;
 };
 
-export type UsersPermissionsRoleUsersArgs = {
+type UsersPermissionsRoleUsersArgs = {
   limit?: Maybe<Scalars['Int']>;
   sort?: Maybe<Scalars['String']>;
   start?: Maybe<Scalars['Int']>;
   where?: Maybe<Scalars['JSON']>;
 };
 
-export type UsersPermissionsRoleAggregator = {
+type UsersPermissionsRoleAggregator = {
   __typename?: 'UsersPermissionsRoleAggregator';
   count?: Maybe<Scalars['Int']>;
   totalCount?: Maybe<Scalars['Int']>;
 };
 
-export type UsersPermissionsRoleConnection = {
+type UsersPermissionsRoleConnection = {
   __typename?: 'UsersPermissionsRoleConnection';
   aggregate?: Maybe<UsersPermissionsRoleAggregator>;
   groupBy?: Maybe<UsersPermissionsRoleGroupBy>;
   values?: Maybe<Array<Maybe<UsersPermissionsRole>>>;
 };
 
-export type UsersPermissionsRoleConnectionDescription = {
+type UsersPermissionsRoleConnectionDescription = {
   __typename?: 'UsersPermissionsRoleConnectionDescription';
   connection?: Maybe<UsersPermissionsRoleConnection>;
   key?: Maybe<Scalars['String']>;
 };
 
-export type UsersPermissionsRoleConnectionId = {
+type UsersPermissionsRoleConnectionId = {
   __typename?: 'UsersPermissionsRoleConnectionId';
   connection?: Maybe<UsersPermissionsRoleConnection>;
   key?: Maybe<Scalars['ID']>;
 };
 
-export type UsersPermissionsRoleConnectionName = {
+type UsersPermissionsRoleConnectionName = {
   __typename?: 'UsersPermissionsRoleConnectionName';
   connection?: Maybe<UsersPermissionsRoleConnection>;
   key?: Maybe<Scalars['String']>;
 };
 
-export type UsersPermissionsRoleConnectionType = {
+type UsersPermissionsRoleConnectionType = {
   __typename?: 'UsersPermissionsRoleConnectionType';
   connection?: Maybe<UsersPermissionsRoleConnection>;
   key?: Maybe<Scalars['String']>;
 };
 
-export type UsersPermissionsRoleConnection_Id = {
+type UsersPermissionsRoleConnection_Id = {
   __typename?: 'UsersPermissionsRoleConnection_id';
   connection?: Maybe<UsersPermissionsRoleConnection>;
   key?: Maybe<Scalars['ID']>;
 };
 
-export type UsersPermissionsRoleGroupBy = {
+type UsersPermissionsRoleGroupBy = {
   __typename?: 'UsersPermissionsRoleGroupBy';
   _id?: Maybe<Array<Maybe<UsersPermissionsRoleConnection_Id>>>;
   description?: Maybe<Array<Maybe<UsersPermissionsRoleConnectionDescription>>>;
@@ -1336,7 +1336,7 @@ export type UsersPermissionsRoleGroupBy = {
   type?: Maybe<Array<Maybe<UsersPermissionsRoleConnectionType>>>;
 };
 
-export type UsersPermissionsUser = {
+type UsersPermissionsUser = {
   __typename?: 'UsersPermissionsUser';
   _id: Scalars['ID'];
   blocked?: Maybe<Scalars['Boolean']>;
@@ -1354,107 +1354,107 @@ export type UsersPermissionsUser = {
   username: Scalars['String'];
 };
 
-export type UsersPermissionsUserGroupsArgs = {
+type UsersPermissionsUserGroupsArgs = {
   limit?: Maybe<Scalars['Int']>;
   sort?: Maybe<Scalars['String']>;
   start?: Maybe<Scalars['Int']>;
   where?: Maybe<Scalars['JSON']>;
 };
 
-export type UsersPermissionsUserProjectsArgs = {
+type UsersPermissionsUserProjectsArgs = {
   limit?: Maybe<Scalars['Int']>;
   sort?: Maybe<Scalars['String']>;
   start?: Maybe<Scalars['Int']>;
   where?: Maybe<Scalars['JSON']>;
 };
 
-export type UsersPermissionsUserTechnologiesArgs = {
+type UsersPermissionsUserTechnologiesArgs = {
   limit?: Maybe<Scalars['Int']>;
   sort?: Maybe<Scalars['String']>;
   start?: Maybe<Scalars['Int']>;
   where?: Maybe<Scalars['JSON']>;
 };
 
-export type UsersPermissionsUserAggregator = {
+type UsersPermissionsUserAggregator = {
   __typename?: 'UsersPermissionsUserAggregator';
   count?: Maybe<Scalars['Int']>;
   totalCount?: Maybe<Scalars['Int']>;
 };
 
-export type UsersPermissionsUserConnection = {
+type UsersPermissionsUserConnection = {
   __typename?: 'UsersPermissionsUserConnection';
   aggregate?: Maybe<UsersPermissionsUserAggregator>;
   groupBy?: Maybe<UsersPermissionsUserGroupBy>;
   values?: Maybe<Array<Maybe<UsersPermissionsUser>>>;
 };
 
-export type UsersPermissionsUserConnectionBlocked = {
+type UsersPermissionsUserConnectionBlocked = {
   __typename?: 'UsersPermissionsUserConnectionBlocked';
   connection?: Maybe<UsersPermissionsUserConnection>;
   key?: Maybe<Scalars['Boolean']>;
 };
 
-export type UsersPermissionsUserConnectionConfirmed = {
+type UsersPermissionsUserConnectionConfirmed = {
   __typename?: 'UsersPermissionsUserConnectionConfirmed';
   connection?: Maybe<UsersPermissionsUserConnection>;
   key?: Maybe<Scalars['Boolean']>;
 };
 
-export type UsersPermissionsUserConnectionCreatedAt = {
+type UsersPermissionsUserConnectionCreatedAt = {
   __typename?: 'UsersPermissionsUserConnectionCreatedAt';
   connection?: Maybe<UsersPermissionsUserConnection>;
   key?: Maybe<Scalars['DateTime']>;
 };
 
-export type UsersPermissionsUserConnectionEmail = {
+type UsersPermissionsUserConnectionEmail = {
   __typename?: 'UsersPermissionsUserConnectionEmail';
   connection?: Maybe<UsersPermissionsUserConnection>;
   key?: Maybe<Scalars['String']>;
 };
 
-export type UsersPermissionsUserConnectionId = {
+type UsersPermissionsUserConnectionId = {
   __typename?: 'UsersPermissionsUserConnectionId';
   connection?: Maybe<UsersPermissionsUserConnection>;
   key?: Maybe<Scalars['ID']>;
 };
 
-export type UsersPermissionsUserConnectionMentor = {
+type UsersPermissionsUserConnectionMentor = {
   __typename?: 'UsersPermissionsUserConnectionMentor';
   connection?: Maybe<UsersPermissionsUserConnection>;
   key?: Maybe<Scalars['Boolean']>;
 };
 
-export type UsersPermissionsUserConnectionProvider = {
+type UsersPermissionsUserConnectionProvider = {
   __typename?: 'UsersPermissionsUserConnectionProvider';
   connection?: Maybe<UsersPermissionsUserConnection>;
   key?: Maybe<Scalars['String']>;
 };
 
-export type UsersPermissionsUserConnectionRole = {
+type UsersPermissionsUserConnectionRole = {
   __typename?: 'UsersPermissionsUserConnectionRole';
   connection?: Maybe<UsersPermissionsUserConnection>;
   key?: Maybe<Scalars['ID']>;
 };
 
-export type UsersPermissionsUserConnectionUpdatedAt = {
+type UsersPermissionsUserConnectionUpdatedAt = {
   __typename?: 'UsersPermissionsUserConnectionUpdatedAt';
   connection?: Maybe<UsersPermissionsUserConnection>;
   key?: Maybe<Scalars['DateTime']>;
 };
 
-export type UsersPermissionsUserConnectionUsername = {
+type UsersPermissionsUserConnectionUsername = {
   __typename?: 'UsersPermissionsUserConnectionUsername';
   connection?: Maybe<UsersPermissionsUserConnection>;
   key?: Maybe<Scalars['String']>;
 };
 
-export type UsersPermissionsUserConnection_Id = {
+type UsersPermissionsUserConnection_Id = {
   __typename?: 'UsersPermissionsUserConnection_id';
   connection?: Maybe<UsersPermissionsUserConnection>;
   key?: Maybe<Scalars['ID']>;
 };
 
-export type UsersPermissionsUserGroupBy = {
+type UsersPermissionsUserGroupBy = {
   __typename?: 'UsersPermissionsUserGroupBy';
   _id?: Maybe<Array<Maybe<UsersPermissionsUserConnection_Id>>>;
   blocked?: Maybe<Array<Maybe<UsersPermissionsUserConnectionBlocked>>>;
@@ -1469,124 +1469,124 @@ export type UsersPermissionsUserGroupBy = {
   username?: Maybe<Array<Maybe<UsersPermissionsUserConnectionUsername>>>;
 };
 
-export type CreateGroupInput = {
+type CreateGroupInput = {
   data?: Maybe<GroupInput>;
 };
 
-export type CreateGroupPayload = {
+type CreateGroupPayload = {
   __typename?: 'createGroupPayload';
   group?: Maybe<Group>;
 };
 
-export type CreateProjectInput = {
+type CreateProjectInput = {
   data?: Maybe<ProjectInput>;
 };
 
-export type CreateProjectPayload = {
+type CreateProjectPayload = {
   __typename?: 'createProjectPayload';
   project?: Maybe<Projects>;
 };
 
-export type CreateProjectsInProgressInput = {
+type CreateProjectsInProgressInput = {
   data?: Maybe<ProjectsInProgressInput>;
 };
 
-export type CreateProjectsInProgressPayload = {
+type CreateProjectsInProgressPayload = {
   __typename?: 'createProjectsInProgressPayload';
   projectsInProgress?: Maybe<ProjectsInProgress>;
 };
 
-export type CreateRoleInput = {
+type CreateRoleInput = {
   data?: Maybe<RoleInput>;
 };
 
-export type CreateRolePayload = {
+type CreateRolePayload = {
   __typename?: 'createRolePayload';
   role?: Maybe<UsersPermissionsRole>;
 };
 
-export type CreateTechnologyInput = {
+type CreateTechnologyInput = {
   data?: Maybe<TechnologyInput>;
 };
 
-export type CreateTechnologyPayload = {
+type CreateTechnologyPayload = {
   __typename?: 'createTechnologyPayload';
   technology?: Maybe<Technologies>;
 };
 
-export type CreateUserInput = {
+type CreateUserInput = {
   data?: Maybe<UserInput>;
 };
 
-export type CreateUserPayload = {
+type CreateUserPayload = {
   __typename?: 'createUserPayload';
   user?: Maybe<UsersPermissionsUser>;
 };
 
-export type DeleteFileInput = {
+type DeleteFileInput = {
   where?: Maybe<InputId>;
 };
 
-export type DeleteFilePayload = {
+type DeleteFilePayload = {
   __typename?: 'deleteFilePayload';
   file?: Maybe<UploadFile>;
 };
 
-export type DeleteGroupInput = {
+type DeleteGroupInput = {
   where?: Maybe<InputId>;
 };
 
-export type DeleteGroupPayload = {
+type DeleteGroupPayload = {
   __typename?: 'deleteGroupPayload';
   group?: Maybe<Group>;
 };
 
-export type DeleteProjectInput = {
+type DeleteProjectInput = {
   where?: Maybe<InputId>;
 };
 
-export type DeleteProjectPayload = {
+type DeleteProjectPayload = {
   __typename?: 'deleteProjectPayload';
   project?: Maybe<Projects>;
 };
 
-export type DeleteProjectsInProgressInput = {
+type DeleteProjectsInProgressInput = {
   where?: Maybe<InputId>;
 };
 
-export type DeleteProjectsInProgressPayload = {
+type DeleteProjectsInProgressPayload = {
   __typename?: 'deleteProjectsInProgressPayload';
   projectsInProgress?: Maybe<ProjectsInProgress>;
 };
 
-export type DeleteRoleInput = {
+type DeleteRoleInput = {
   where?: Maybe<InputId>;
 };
 
-export type DeleteRolePayload = {
+type DeleteRolePayload = {
   __typename?: 'deleteRolePayload';
   role?: Maybe<UsersPermissionsRole>;
 };
 
-export type DeleteTechnologyInput = {
+type DeleteTechnologyInput = {
   where?: Maybe<InputId>;
 };
 
-export type DeleteTechnologyPayload = {
+type DeleteTechnologyPayload = {
   __typename?: 'deleteTechnologyPayload';
   technology?: Maybe<Technologies>;
 };
 
-export type DeleteUserInput = {
+type DeleteUserInput = {
   where?: Maybe<InputId>;
 };
 
-export type DeleteUserPayload = {
+type DeleteUserPayload = {
   __typename?: 'deleteUserPayload';
   user?: Maybe<UsersPermissionsUser>;
 };
 
-export type EditFileInput = {
+type EditFileInput = {
   alternativeText?: Maybe<Scalars['String']>;
   caption?: Maybe<Scalars['String']>;
   created_by?: Maybe<Scalars['ID']>;
@@ -1606,7 +1606,7 @@ export type EditFileInput = {
   width?: Maybe<Scalars['Int']>;
 };
 
-export type EditGroupInput = {
+type EditGroupInput = {
   created_by?: Maybe<Scalars['ID']>;
   project?: Maybe<Scalars['ID']>;
   projects?: Maybe<Array<Maybe<Scalars['ID']>>>;
@@ -1616,14 +1616,14 @@ export type EditGroupInput = {
   users_permissions_users?: Maybe<Array<Maybe<Scalars['ID']>>>;
 };
 
-export type EditLocaleInput = {
+type EditLocaleInput = {
   code?: Maybe<Scalars['String']>;
   created_by?: Maybe<Scalars['ID']>;
   name?: Maybe<Scalars['String']>;
   updated_by?: Maybe<Scalars['ID']>;
 };
 
-export type EditProjectInput = {
+type EditProjectInput = {
   created_by?: Maybe<Scalars['ID']>;
   description?: Maybe<Scalars['String']>;
   group?: Maybe<Scalars['ID']>;
@@ -1636,13 +1636,13 @@ export type EditProjectInput = {
   users?: Maybe<Array<Maybe<Scalars['ID']>>>;
 };
 
-export type EditProjectsInProgressInput = {
+type EditProjectsInProgressInput = {
   created_by?: Maybe<Scalars['ID']>;
   published_at?: Maybe<Scalars['DateTime']>;
   updated_by?: Maybe<Scalars['ID']>;
 };
 
-export type EditRoleInput = {
+type EditRoleInput = {
   created_by?: Maybe<Scalars['ID']>;
   description?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
@@ -1652,7 +1652,7 @@ export type EditRoleInput = {
   users?: Maybe<Array<Maybe<Scalars['ID']>>>;
 };
 
-export type EditTechnologyInput = {
+type EditTechnologyInput = {
   created_by?: Maybe<Scalars['ID']>;
   description?: Maybe<Scalars['String']>;
   image?: Maybe<Scalars['ID']>;
@@ -1663,7 +1663,7 @@ export type EditTechnologyInput = {
   users_permissions_users?: Maybe<Array<Maybe<Scalars['ID']>>>;
 };
 
-export type EditUserInput = {
+type EditUserInput = {
   blocked?: Maybe<Scalars['Boolean']>;
   confirmationToken?: Maybe<Scalars['String']>;
   confirmed?: Maybe<Scalars['Boolean']>;
@@ -1681,62 +1681,62 @@ export type EditUserInput = {
   username?: Maybe<Scalars['String']>;
 };
 
-export type UpdateGroupInput = {
+type UpdateGroupInput = {
   data?: Maybe<EditGroupInput>;
   where?: Maybe<InputId>;
 };
 
-export type UpdateGroupPayload = {
+type UpdateGroupPayload = {
   __typename?: 'updateGroupPayload';
   group?: Maybe<Group>;
 };
 
-export type UpdateProjectInput = {
+type UpdateProjectInput = {
   data?: Maybe<EditProjectInput>;
   where?: Maybe<InputId>;
 };
 
-export type UpdateProjectPayload = {
+type UpdateProjectPayload = {
   __typename?: 'updateProjectPayload';
   project?: Maybe<Projects>;
 };
 
-export type UpdateProjectsInProgressInput = {
+type UpdateProjectsInProgressInput = {
   data?: Maybe<EditProjectsInProgressInput>;
   where?: Maybe<InputId>;
 };
 
-export type UpdateProjectsInProgressPayload = {
+type UpdateProjectsInProgressPayload = {
   __typename?: 'updateProjectsInProgressPayload';
   projectsInProgress?: Maybe<ProjectsInProgress>;
 };
 
-export type UpdateRoleInput = {
+type UpdateRoleInput = {
   data?: Maybe<EditRoleInput>;
   where?: Maybe<InputId>;
 };
 
-export type UpdateRolePayload = {
+type UpdateRolePayload = {
   __typename?: 'updateRolePayload';
   role?: Maybe<UsersPermissionsRole>;
 };
 
-export type UpdateTechnologyInput = {
+type UpdateTechnologyInput = {
   data?: Maybe<EditTechnologyInput>;
   where?: Maybe<InputId>;
 };
 
-export type UpdateTechnologyPayload = {
+type UpdateTechnologyPayload = {
   __typename?: 'updateTechnologyPayload';
   technology?: Maybe<Technologies>;
 };
 
-export type UpdateUserInput = {
+type UpdateUserInput = {
   data?: Maybe<EditUserInput>;
   where?: Maybe<InputId>;
 };
 
-export type UpdateUserPayload = {
+type UpdateUserPayload = {
   __typename?: 'updateUserPayload';
   user?: Maybe<UsersPermissionsUser>;
 };
