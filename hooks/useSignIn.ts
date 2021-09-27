@@ -5,11 +5,13 @@ import { toast } from 'react-toastify';
 
 export const useSignIn = () => {
   const { replace } = useRouter();
+
   const handleSignIn = async (credential: Pick<User, 'email' | 'password'>) => {
     const result = await signIn('credentials', {
       redirect: false,
       ...credential,
     });
+
     if (result?.error) {
       toast.error(result.error);
     } else {

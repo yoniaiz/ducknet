@@ -3,7 +3,12 @@ const ROOT = path.join(__dirname, '..');
 
 module.exports = {
   rootDir: ROOT,
-  collectCoverageFrom: ['**/*.{js,jsx,ts,tsx}', '!**/*.d.ts', '!**/node_modules/**'],
+  collectCoverageFrom: [
+    'pages/**/*.tsx',
+    'pages/*.tsx',
+    'components/*.{ts,tsx}',
+    'components/**/*.{ts,tsx}',
+  ],
   moduleFileExtensions: ['js', 'jsx', 'ts', 'tsx'],
   moduleNameMapper: {
     /* Handle CSS imports (with CSS modules)

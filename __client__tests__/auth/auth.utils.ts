@@ -1,4 +1,10 @@
 import { fireEvent, screen } from '@testing-library/dom';
+import * as nextRouter from 'next/router';
+
+const mockRouter = () =>
+  jest
+    .spyOn(nextRouter, 'useRouter')
+    .mockImplementation(() => ({ ...jest.requireActual('next/router'), replace: jest.fn() }));
 
 const getSubmitButton = () => screen.getByRole('button', { name: /submit/i });
 const getEmailInput = () => screen.getByLabelText(/email/i);
@@ -10,10 +16,12 @@ const updateField = (getInput: () => HTMLElement) => (value: string) =>
 const updateEmailInput = updateField(getEmailInput);
 const updatePasswordInput = updateField(getPasswordInput);
 
-export const loginTestUtils = {
+export const authTestUtils = {
   getSubmitButton,
   getEmailInput,
   getPasswordInput,
   updateEmailInput,
   updatePasswordInput,
+  updateField,
+  mockRouter,
 };
