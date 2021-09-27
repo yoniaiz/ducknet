@@ -1,18 +1,20 @@
 import { useQuery } from '@apollo/client';
-import { PROJECTS_SAVED } from 'GraphQl/queries/user';
+import { SAVED_PROJECTS } from 'GraphQl/queries/user';
 
 const Saved = () => {
-  const { data, loading } = useQuery<{ userProjectsByStatus: Project[] }>(PROJECTS_SAVED);
+  const { data, loading } = useQuery<{ me: { savedProjects: CompletedProject[] } }>(SAVED_PROJECTS);
+
+  const projects = data?.me.savedProjects || [];
 
   if (loading) {
     return <div>Loading</div>;
   }
 
-  if (!data?.userProjectsByStatus?.length) {
+  if (!projects.length) {
     return <div>No projects yet</div>;
   }
 
-  return data.userProjectsByStatus.map(({ id, title, description, status }) => (
+  return projects.map(({ project: { id, title, description, status } }) => (
     <div key={id}>
       <h3>{title}</h3>
       <p>{description}</p>
