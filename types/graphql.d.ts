@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 type Maybe<T> = T | null;
 type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
@@ -26,6 +25,8 @@ type Scalars = {
   UsersPermissionsUserCompletedProjectsDynamicZoneInput: unknown;
   /** Input type for dynamic zone projectsInProgress of UsersPermissionsUser */
   UsersPermissionsUserProjectsInProgressDynamicZoneInput: unknown;
+  /** Input type for dynamic zone savedProjects of UsersPermissionsUser */
+  UsersPermissionsUserSavedProjectsDynamicZoneInput: unknown;
 };
 
 type AdminUser = {
@@ -68,6 +69,19 @@ type ComponentProjectInProgressProjectInProgressInput = {
   progress?: Maybe<Scalars['Float']>;
   project?: Maybe<Scalars['ID']>;
   started?: Maybe<Scalars['Date']>;
+};
+
+type ComponentSavedProjectSavedProjectInput = {
+  project?: Maybe<Scalars['ID']>;
+  saved?: Maybe<Scalars['Boolean']>;
+};
+
+type ComponentSavedProjectSavedProjects = {
+  __typename?: 'ComponentSavedProjectSavedProjects';
+  _id: Scalars['ID'];
+  id: Scalars['ID'];
+  project?: Maybe<Projects>;
+  saved?: Maybe<Scalars['Boolean']>;
 };
 
 enum Enum_Projects_Status {
@@ -230,6 +244,7 @@ type Morph =
   | CompletedProject
   | ComponentCompletedProjectCompletedProject
   | ComponentProjectInProgressProjectInProgress
+  | ComponentSavedProjectSavedProjects
   | Group
   | GroupAggregator
   | GroupConnection
@@ -267,6 +282,7 @@ type Morph =
   | ProjectsInProgressConnectionUpdatedAt
   | ProjectsInProgressConnection_Id
   | ProjectsInProgressGroupBy
+  | SavedProject
   | Technologies
   | TechnologiesAggregator
   | TechnologiesConnection
@@ -333,6 +349,7 @@ type Morph =
   | UsersPermissionsUserConnectionProjectInProgress
   | UsersPermissionsUserConnectionProvider
   | UsersPermissionsUserConnectionRole
+  | UsersPermissionsUserConnectionSavedProject
   | UsersPermissionsUserConnectionUpdatedAt
   | UsersPermissionsUserConnectionUsername
   | UsersPermissionsUserConnection_Id
@@ -905,6 +922,12 @@ type RoleInput = {
   users?: Maybe<Array<Maybe<Scalars['ID']>>>;
 };
 
+type SavedProject = {
+  __typename?: 'SavedProject';
+  project: Project;
+  saved?: Maybe<Scalars['Boolean']>;
+};
+
 type Technologies = {
   __typename?: 'Technologies';
   _id: Scalars['ID'];
@@ -1242,6 +1265,8 @@ type UserInput = {
   provider?: Maybe<Scalars['String']>;
   resetPasswordToken?: Maybe<Scalars['String']>;
   role?: Maybe<Scalars['ID']>;
+  savedProject?: Maybe<ComponentSavedProjectSavedProjectInput>;
+  savedProjects?: Maybe<Array<Scalars['UsersPermissionsUserSavedProjectsDynamicZoneInput']>>;
   technologies?: Maybe<Array<Maybe<Scalars['ID']>>>;
   updated_by?: Maybe<Scalars['ID']>;
   username: Scalars['String'];
@@ -1281,6 +1306,7 @@ type UsersPermissionsMe = {
   projects?: Maybe<Array<Maybe<Project>>>;
   projectsInProgress?: Maybe<Array<Maybe<ProjectInProgress>>>;
   role?: Maybe<UsersPermissionsMeRole>;
+  savedProjects?: Maybe<Array<Maybe<SavedProject>>>;
   username: Scalars['String'];
 };
 
@@ -1403,6 +1429,8 @@ type UsersPermissionsUser = {
   projectsInProgress?: Maybe<Array<Maybe<UsersPermissionsUserProjectsInProgressDynamicZone>>>;
   provider?: Maybe<Scalars['String']>;
   role?: Maybe<UsersPermissionsRole>;
+  savedProject?: Maybe<ComponentSavedProjectSavedProjects>;
+  savedProjects?: Maybe<Array<Maybe<UsersPermissionsUserSavedProjectsDynamicZone>>>;
   technologies?: Maybe<Array<Maybe<Technologies>>>;
   updatedAt: Scalars['DateTime'];
   username: Scalars['String'];
@@ -1497,6 +1525,12 @@ type UsersPermissionsUserConnectionRole = {
   key?: Maybe<Scalars['ID']>;
 };
 
+type UsersPermissionsUserConnectionSavedProject = {
+  __typename?: 'UsersPermissionsUserConnectionSavedProject';
+  connection?: Maybe<UsersPermissionsUserConnection>;
+  key?: Maybe<Scalars['ID']>;
+};
+
 type UsersPermissionsUserConnectionUpdatedAt = {
   __typename?: 'UsersPermissionsUserConnectionUpdatedAt';
   connection?: Maybe<UsersPermissionsUserConnection>;
@@ -1528,12 +1562,15 @@ type UsersPermissionsUserGroupBy = {
   projectInProgress?: Maybe<Array<Maybe<UsersPermissionsUserConnectionProjectInProgress>>>;
   provider?: Maybe<Array<Maybe<UsersPermissionsUserConnectionProvider>>>;
   role?: Maybe<Array<Maybe<UsersPermissionsUserConnectionRole>>>;
+  savedProject?: Maybe<Array<Maybe<UsersPermissionsUserConnectionSavedProject>>>;
   updatedAt?: Maybe<Array<Maybe<UsersPermissionsUserConnectionUpdatedAt>>>;
   username?: Maybe<Array<Maybe<UsersPermissionsUserConnectionUsername>>>;
 };
 
 type UsersPermissionsUserProjectsInProgressDynamicZone =
   ComponentProjectInProgressProjectInProgress;
+
+type UsersPermissionsUserSavedProjectsDynamicZone = ComponentSavedProjectSavedProjects;
 
 type CreateGroupInput = {
   data?: Maybe<GroupInput>;
@@ -1665,6 +1702,12 @@ type EditComponentProjectInProgressProjectInProgressInput = {
   started?: Maybe<Scalars['Date']>;
 };
 
+type EditComponentSavedProjectSavedProjectInput = {
+  id?: Maybe<Scalars['ID']>;
+  project?: Maybe<Scalars['ID']>;
+  saved?: Maybe<Scalars['Boolean']>;
+};
+
 type EditFileInput = {
   alternativeText?: Maybe<Scalars['String']>;
   caption?: Maybe<Scalars['String']>;
@@ -1761,6 +1804,8 @@ type EditUserInput = {
   provider?: Maybe<Scalars['String']>;
   resetPasswordToken?: Maybe<Scalars['String']>;
   role?: Maybe<Scalars['ID']>;
+  savedProject?: Maybe<EditComponentSavedProjectSavedProjectInput>;
+  savedProjects?: Maybe<Array<Scalars['UsersPermissionsUserSavedProjectsDynamicZoneInput']>>;
   technologies?: Maybe<Array<Maybe<Scalars['ID']>>>;
   updated_by?: Maybe<Scalars['ID']>;
   username?: Maybe<Scalars['String']>;
