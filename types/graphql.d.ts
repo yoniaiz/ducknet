@@ -22,6 +22,10 @@ type Scalars = {
   Time: unknown;
   /** The `Upload` scalar type represents a file upload. */
   Upload: unknown;
+  /** Input type for dynamic zone completedProjects of UsersPermissionsUser */
+  UsersPermissionsUserCompletedProjectsDynamicZoneInput: unknown;
+  /** Input type for dynamic zone projectsInProgress of UsersPermissionsUser */
+  UsersPermissionsUserProjectsInProgressDynamicZoneInput: unknown;
 };
 
 type AdminUser = {
@@ -30,6 +34,40 @@ type AdminUser = {
   id: Scalars['ID'];
   lastname: Scalars['String'];
   username?: Maybe<Scalars['String']>;
+};
+
+type CompletedProject = {
+  __typename?: 'CompletedProject';
+  completedOn: Scalars['Date'];
+  project: Project;
+};
+
+type ComponentCompletedProjectCompletedProject = {
+  __typename?: 'ComponentCompletedProjectCompletedProject';
+  _id: Scalars['ID'];
+  completedOn?: Maybe<Scalars['DateTime']>;
+  id: Scalars['ID'];
+  project?: Maybe<Projects>;
+};
+
+type ComponentCompletedProjectCompletedProjectInput = {
+  completedOn?: Maybe<Scalars['DateTime']>;
+  project?: Maybe<Scalars['ID']>;
+};
+
+type ComponentProjectInProgressProjectInProgress = {
+  __typename?: 'ComponentProjectInProgressProjectInProgress';
+  _id: Scalars['ID'];
+  id: Scalars['ID'];
+  progress?: Maybe<Scalars['Float']>;
+  project?: Maybe<Projects>;
+  started?: Maybe<Scalars['Date']>;
+};
+
+type ComponentProjectInProgressProjectInProgressInput = {
+  progress?: Maybe<Scalars['Float']>;
+  project?: Maybe<Scalars['ID']>;
+  started?: Maybe<Scalars['Date']>;
 };
 
 enum Enum_Projects_Status {
@@ -189,6 +227,9 @@ type LocaleInput = {
 };
 
 type Morph =
+  | CompletedProject
+  | ComponentCompletedProjectCompletedProject
+  | ComponentProjectInProgressProjectInProgress
   | Group
   | GroupAggregator
   | GroupConnection
@@ -202,6 +243,7 @@ type Morph =
   | GroupGroupBy
   | I18NLocale
   | Project
+  | ProjectInProgress
   | Projects
   | ProjectsAggregator
   | ProjectsConnection
@@ -282,11 +324,13 @@ type Morph =
   | UsersPermissionsUserAggregator
   | UsersPermissionsUserConnection
   | UsersPermissionsUserConnectionBlocked
+  | UsersPermissionsUserConnectionCompletedProject
   | UsersPermissionsUserConnectionConfirmed
   | UsersPermissionsUserConnectionCreatedAt
   | UsersPermissionsUserConnectionEmail
   | UsersPermissionsUserConnectionId
   | UsersPermissionsUserConnectionMentor
+  | UsersPermissionsUserConnectionProjectInProgress
   | UsersPermissionsUserConnectionProvider
   | UsersPermissionsUserConnectionRole
   | UsersPermissionsUserConnectionUpdatedAt
@@ -479,6 +523,13 @@ type Project = {
   title: Scalars['String'];
 };
 
+type ProjectInProgress = {
+  __typename?: 'ProjectInProgress';
+  progress: Scalars['Float'];
+  project: Project;
+  started: Scalars['Date'];
+};
+
 type ProjectInput = {
   created_by?: Maybe<Scalars['ID']>;
   description?: Maybe<Scalars['String']>;
@@ -489,7 +540,6 @@ type ProjectInput = {
   technologies?: Maybe<Array<Maybe<Scalars['ID']>>>;
   title?: Maybe<Scalars['String']>;
   updated_by?: Maybe<Scalars['ID']>;
-  users?: Maybe<Array<Maybe<Scalars['ID']>>>;
 };
 
 enum ProjectStatus {
@@ -511,17 +561,9 @@ type Projects = {
   technologies?: Maybe<Array<Maybe<Technologies>>>;
   title?: Maybe<Scalars['String']>;
   updatedAt: Scalars['DateTime'];
-  users?: Maybe<Array<Maybe<UsersPermissionsUser>>>;
 };
 
 type ProjectsTechnologiesArgs = {
-  limit?: Maybe<Scalars['Int']>;
-  sort?: Maybe<Scalars['String']>;
-  start?: Maybe<Scalars['Int']>;
-  where?: Maybe<Scalars['JSON']>;
-};
-
-type ProjectsUsersArgs = {
   limit?: Maybe<Scalars['Int']>;
   sort?: Maybe<Scalars['String']>;
   start?: Maybe<Scalars['Int']>;
@@ -1182,6 +1224,10 @@ type UploadFileGroupBy = {
 
 type UserInput = {
   blocked?: Maybe<Scalars['Boolean']>;
+  completedProject?: Maybe<ComponentCompletedProjectCompletedProjectInput>;
+  completedProjects?: Maybe<
+    Array<Scalars['UsersPermissionsUserCompletedProjectsDynamicZoneInput']>
+  >;
   confirmationToken?: Maybe<Scalars['String']>;
   confirmed?: Maybe<Scalars['Boolean']>;
   created_by?: Maybe<Scalars['ID']>;
@@ -1189,7 +1235,10 @@ type UserInput = {
   groups?: Maybe<Array<Maybe<Scalars['ID']>>>;
   mentor?: Maybe<Scalars['Boolean']>;
   password?: Maybe<Scalars['String']>;
-  projects?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  projectInProgress?: Maybe<ComponentProjectInProgressProjectInProgressInput>;
+  projectsInProgress?: Maybe<
+    Array<Scalars['UsersPermissionsUserProjectsInProgressDynamicZoneInput']>
+  >;
   provider?: Maybe<Scalars['String']>;
   resetPasswordToken?: Maybe<Scalars['String']>;
   role?: Maybe<Scalars['ID']>;
@@ -1224,11 +1273,13 @@ type UsersPermissionsLoginPayload = {
 type UsersPermissionsMe = {
   __typename?: 'UsersPermissionsMe';
   blocked?: Maybe<Scalars['Boolean']>;
+  completedProjects?: Maybe<Array<Maybe<CompletedProject>>>;
   confirmed?: Maybe<Scalars['Boolean']>;
   email: Scalars['String'];
   groups: Scalars['JSON'];
   id: Scalars['ID'];
   projects?: Maybe<Array<Maybe<Project>>>;
+  projectsInProgress?: Maybe<Array<Maybe<ProjectInProgress>>>;
   role?: Maybe<UsersPermissionsMeRole>;
   username: Scalars['String'];
 };
@@ -1340,13 +1391,16 @@ type UsersPermissionsUser = {
   __typename?: 'UsersPermissionsUser';
   _id: Scalars['ID'];
   blocked?: Maybe<Scalars['Boolean']>;
+  completedProject?: Maybe<ComponentCompletedProjectCompletedProject>;
+  completedProjects?: Maybe<Array<Maybe<UsersPermissionsUserCompletedProjectsDynamicZone>>>;
   confirmed?: Maybe<Scalars['Boolean']>;
   createdAt: Scalars['DateTime'];
   email: Scalars['String'];
   groups?: Maybe<Array<Maybe<Group>>>;
   id: Scalars['ID'];
   mentor?: Maybe<Scalars['Boolean']>;
-  projects?: Maybe<Array<Maybe<Projects>>>;
+  projectInProgress?: Maybe<ComponentProjectInProgressProjectInProgress>;
+  projectsInProgress?: Maybe<Array<Maybe<UsersPermissionsUserProjectsInProgressDynamicZone>>>;
   provider?: Maybe<Scalars['String']>;
   role?: Maybe<UsersPermissionsRole>;
   technologies?: Maybe<Array<Maybe<Technologies>>>;
@@ -1355,13 +1409,6 @@ type UsersPermissionsUser = {
 };
 
 type UsersPermissionsUserGroupsArgs = {
-  limit?: Maybe<Scalars['Int']>;
-  sort?: Maybe<Scalars['String']>;
-  start?: Maybe<Scalars['Int']>;
-  where?: Maybe<Scalars['JSON']>;
-};
-
-type UsersPermissionsUserProjectsArgs = {
   limit?: Maybe<Scalars['Int']>;
   sort?: Maybe<Scalars['String']>;
   start?: Maybe<Scalars['Int']>;
@@ -1381,6 +1428,8 @@ type UsersPermissionsUserAggregator = {
   totalCount?: Maybe<Scalars['Int']>;
 };
 
+type UsersPermissionsUserCompletedProjectsDynamicZone = ComponentCompletedProjectCompletedProject;
+
 type UsersPermissionsUserConnection = {
   __typename?: 'UsersPermissionsUserConnection';
   aggregate?: Maybe<UsersPermissionsUserAggregator>;
@@ -1392,6 +1441,12 @@ type UsersPermissionsUserConnectionBlocked = {
   __typename?: 'UsersPermissionsUserConnectionBlocked';
   connection?: Maybe<UsersPermissionsUserConnection>;
   key?: Maybe<Scalars['Boolean']>;
+};
+
+type UsersPermissionsUserConnectionCompletedProject = {
+  __typename?: 'UsersPermissionsUserConnectionCompletedProject';
+  connection?: Maybe<UsersPermissionsUserConnection>;
+  key?: Maybe<Scalars['ID']>;
 };
 
 type UsersPermissionsUserConnectionConfirmed = {
@@ -1422,6 +1477,12 @@ type UsersPermissionsUserConnectionMentor = {
   __typename?: 'UsersPermissionsUserConnectionMentor';
   connection?: Maybe<UsersPermissionsUserConnection>;
   key?: Maybe<Scalars['Boolean']>;
+};
+
+type UsersPermissionsUserConnectionProjectInProgress = {
+  __typename?: 'UsersPermissionsUserConnectionProjectInProgress';
+  connection?: Maybe<UsersPermissionsUserConnection>;
+  key?: Maybe<Scalars['ID']>;
 };
 
 type UsersPermissionsUserConnectionProvider = {
@@ -1458,16 +1519,21 @@ type UsersPermissionsUserGroupBy = {
   __typename?: 'UsersPermissionsUserGroupBy';
   _id?: Maybe<Array<Maybe<UsersPermissionsUserConnection_Id>>>;
   blocked?: Maybe<Array<Maybe<UsersPermissionsUserConnectionBlocked>>>;
+  completedProject?: Maybe<Array<Maybe<UsersPermissionsUserConnectionCompletedProject>>>;
   confirmed?: Maybe<Array<Maybe<UsersPermissionsUserConnectionConfirmed>>>;
   createdAt?: Maybe<Array<Maybe<UsersPermissionsUserConnectionCreatedAt>>>;
   email?: Maybe<Array<Maybe<UsersPermissionsUserConnectionEmail>>>;
   id?: Maybe<Array<Maybe<UsersPermissionsUserConnectionId>>>;
   mentor?: Maybe<Array<Maybe<UsersPermissionsUserConnectionMentor>>>;
+  projectInProgress?: Maybe<Array<Maybe<UsersPermissionsUserConnectionProjectInProgress>>>;
   provider?: Maybe<Array<Maybe<UsersPermissionsUserConnectionProvider>>>;
   role?: Maybe<Array<Maybe<UsersPermissionsUserConnectionRole>>>;
   updatedAt?: Maybe<Array<Maybe<UsersPermissionsUserConnectionUpdatedAt>>>;
   username?: Maybe<Array<Maybe<UsersPermissionsUserConnectionUsername>>>;
 };
+
+type UsersPermissionsUserProjectsInProgressDynamicZone =
+  ComponentProjectInProgressProjectInProgress;
 
 type CreateGroupInput = {
   data?: Maybe<GroupInput>;
@@ -1586,6 +1652,19 @@ type DeleteUserPayload = {
   user?: Maybe<UsersPermissionsUser>;
 };
 
+type EditComponentCompletedProjectCompletedProjectInput = {
+  completedOn?: Maybe<Scalars['DateTime']>;
+  id?: Maybe<Scalars['ID']>;
+  project?: Maybe<Scalars['ID']>;
+};
+
+type EditComponentProjectInProgressProjectInProgressInput = {
+  id?: Maybe<Scalars['ID']>;
+  progress?: Maybe<Scalars['Float']>;
+  project?: Maybe<Scalars['ID']>;
+  started?: Maybe<Scalars['Date']>;
+};
+
 type EditFileInput = {
   alternativeText?: Maybe<Scalars['String']>;
   caption?: Maybe<Scalars['String']>;
@@ -1633,7 +1712,6 @@ type EditProjectInput = {
   technologies?: Maybe<Array<Maybe<Scalars['ID']>>>;
   title?: Maybe<Scalars['String']>;
   updated_by?: Maybe<Scalars['ID']>;
-  users?: Maybe<Array<Maybe<Scalars['ID']>>>;
 };
 
 type EditProjectsInProgressInput = {
@@ -1665,6 +1743,10 @@ type EditTechnologyInput = {
 
 type EditUserInput = {
   blocked?: Maybe<Scalars['Boolean']>;
+  completedProject?: Maybe<EditComponentCompletedProjectCompletedProjectInput>;
+  completedProjects?: Maybe<
+    Array<Scalars['UsersPermissionsUserCompletedProjectsDynamicZoneInput']>
+  >;
   confirmationToken?: Maybe<Scalars['String']>;
   confirmed?: Maybe<Scalars['Boolean']>;
   created_by?: Maybe<Scalars['ID']>;
@@ -1672,7 +1754,10 @@ type EditUserInput = {
   groups?: Maybe<Array<Maybe<Scalars['ID']>>>;
   mentor?: Maybe<Scalars['Boolean']>;
   password?: Maybe<Scalars['String']>;
-  projects?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  projectInProgress?: Maybe<EditComponentProjectInProgressProjectInProgressInput>;
+  projectsInProgress?: Maybe<
+    Array<Scalars['UsersPermissionsUserProjectsInProgressDynamicZoneInput']>
+  >;
   provider?: Maybe<Scalars['String']>;
   resetPasswordToken?: Maybe<Scalars['String']>;
   role?: Maybe<Scalars['ID']>;

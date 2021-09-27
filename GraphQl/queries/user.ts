@@ -1,35 +1,47 @@
 import { gql } from '@apollo/client';
 
 export const ME = gql`
-  query me {
+  query Me {
     me {
       username
-      projects {
-        id
-        title
+      projectsInProgress {
+        project {
+          title
+        }
+        started
+        progress
       }
     }
   }
 `;
 
 export const PROJECTS_IN_PROGRESS = gql`
-  query projectsInProgress {
-    userProjectsByStatus(status: "inProgress") {
-      id
-      description
-      title
-      status
+  query ProjectInProgress {
+    me {
+      projectsInProgress {
+        project {
+          id
+          title
+          description
+        }
+        started
+        progress
+      }
     }
   }
 `;
 
-export const PROJECTS_COMPETED = gql`
-  query projectsCompleted {
-    userProjectsByStatus(status: "completed") {
-      id
-      description
-      title
-      status
+export const COMPLETED_PROJECTS = gql`
+  query CompletedProjects {
+    me {
+      completedProjects {
+        project {
+          id
+          title
+          description
+        }
+        completedOn
+      }
     }
   }
 `;
