@@ -1,74 +1,56 @@
 import { gql } from '@apollo/client';
 
 export const ME = gql`
-  query me {
+  query Me {
     me {
       username
-      projects {
-        id
-        title
-      }
+      email
+      id
     }
   }
 `;
 
 export const PROJECTS_IN_PROGRESS = gql`
-  query projectsInProgress {
-    userProjectsByStatus(status: "inProgress") {
-      id
-      description
-      title
-      status
+  query ProjectInProgress {
+    me {
+      projectsInProgress {
+        project {
+          id
+          title
+          description
+        }
+        started
+        progress
+      }
     }
   }
 `;
 
-export const PROJECTS_COMPETED = gql`
-  query projectsCompleted {
-    userProjectsByStatus(status: "completed") {
-      id
-      description
-      title
-      status
+export const COMPLETED_PROJECTS = gql`
+  query CompletedProjects {
+    me {
+      completedProjects {
+        project {
+          id
+          title
+          description
+        }
+        completedOn
+      }
     }
   }
 `;
 
-export const PROJECTS_SAVED = gql`
-  query projectsSaved {
-    userProjectsByStatus(status: "saved") {
-      id
-      description
-      title
-      status
+export const SAVED_PROJECTS = gql`
+  query SavedProjects {
+    me {
+      savedProjects {
+        project {
+          id
+          title
+          description
+        }
+      }
     }
   }
 `;
-
-// export const PROJECTS_IN_PROGRESS_V2 = gql`
-//   query projectsInProgressV2 {
-//     me {
-//       projects {
-//         title
-//         description
-//         id
-//       }
-//     }
-//   }
-// `;
-
-// export const GET_GROUP_IDS = gql`
-//   query getGroupIds {
-//     me {
-//       groups
-//     }
-//   }
-// `;
-
-// export const GET_MENTORS_IDS = gql`
-//   query getMentorIds {
-//     me {
-//       mentors
-//     }
-//   }
-// `;

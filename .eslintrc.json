@@ -12,7 +12,8 @@
   ],
   "rules": {
     "no-undef": "off",
-    "no-unused-vars": ["error", { "argsIgnorePattern": "this" }],
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": "error",
     "react/react-in-jsx-scope": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".tsx", ".ts"] }],
     "react/prop-types": "off",
