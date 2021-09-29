@@ -1,16 +1,12 @@
 import { PROJECTS } from 'GraphQl/queries/projects';
 import { GetStaticProps } from 'next';
 import { useQuery } from '@apollo/client';
-import axios from 'axios';
+import { initializeApollo } from '@hooks/useApollo';
 
-interface Props {
-  projects: Project[];
-}
-
-const FindProjects = ({ projects }: Props) => {
+const FindProjects = () => {
   const { data } = useQuery<{ projects: Projects[] }>(PROJECTS);
 
-  const allProjects = data?.projects || projects;
+  const allProjects = data?.projects;
 
   if (allProjects?.length) {
     return allProjects.map((project) => (
@@ -26,10 +22,15 @@ const FindProjects = ({ projects }: Props) => {
 
 export const getStaticProps: GetStaticProps = async () => {
   try {
-    const { data } = await axios.get<Projects>(`${process.env.CMS_API}/projects`);
-    return { props: { projects: data }, revalidate: 60 };
+    const apolloClient = initializeApollo();
+
+    await apolloClient.query({
+      query: PROJECTS,
+    });
+
+    return { props: { initialApolloState: apolloClient.cache.extract() }, revalidate: 60 };
   } catch (e) {
-    return { props: { projects: [] } };
+    return { props: {} };
   }
 };
 

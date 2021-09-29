@@ -8,9 +8,11 @@ import Layout from '@components/layout';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 import { ApolloProvider } from '@apollo/client';
-import client from '@utils/apollo-client';
+import { useApollo } from '@hooks/useApollo';
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const client = useApollo(pageProps.initialApolloState);
+
   return (
     <ApolloProvider client={client}>
       <AuthProvider session={pageProps.session}>
