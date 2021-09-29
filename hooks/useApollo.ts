@@ -6,7 +6,8 @@ import { getSession } from 'next-auth/client';
 import { useMemo } from 'react';
 
 let apolloClient: ApolloClient<NormalizedCacheObject>;
-const uri = `http://localhost:1337/graphql`;
+const domain = process.env.NEXT_PUBLIC_CMS_API;
+const uri = `${domain}/graphql`;
 
 function createClientLink() {
   const errorLink = onError(({ graphQLErrors }) => {

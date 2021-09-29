@@ -14,10 +14,13 @@ export default NextAuth({
       // @ts-ignore
       async authorize(credentials) {
         try {
-          const { data } = await axios.post<UserSession>(`${process.env.CMS_API}/auth/local`, {
-            identifier: credentials.email,
-            password: credentials.password,
-          });
+          const { data } = await axios.post<UserSession>(
+            `${process.env.NEXT_PUBLIC_CMS_API}/auth/local`,
+            {
+              identifier: credentials.email,
+              password: credentials.password,
+            }
+          );
 
           const user: FlatUserSession = {
             jwt: data?.jwt,

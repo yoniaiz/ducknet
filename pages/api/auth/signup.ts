@@ -7,7 +7,7 @@ const handler = nc();
 
 handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    await axios.post(`${process.env.CMS_API}/auth/local/register`, req.body);
+    await axios.post(`${process.env.NEXT_PUBLIC_CMS_API}/auth/local/register`, req.body);
     res.status(201).json({ message: 'Created user!' });
   } catch (e) {
     if (isAxiosErrorMessage<[{ messages: { id: string; message: string }[] }]>(e)) {
