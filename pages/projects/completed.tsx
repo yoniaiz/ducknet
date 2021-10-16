@@ -1,4 +1,5 @@
 import { useQuery } from '@apollo/client';
+import ProjectCard from '@components/projectCard';
 import { COMPLETED_PROJECTS } from 'GraphQl/queries/user';
 
 const Completed = () => {
@@ -14,11 +15,8 @@ const Completed = () => {
     return <div>No projects yet</div>;
   }
 
-  return projects.map(({ project: { id, title, description } }) => (
-    <div key={id}>
-      <h3>{title}</h3>
-      <p>{description}</p>
-    </div>
+  return projects.map(({ project }) => (
+    <ProjectCard key={project.id} project={project as Projects} />
   ));
 };
 export default Completed;

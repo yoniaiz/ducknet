@@ -1,4 +1,5 @@
 import { useQuery } from '@apollo/client';
+import ProjectCard from '@components/projectCard';
 import { SAVED_PROJECTS } from 'GraphQl/queries/user';
 
 const Saved = () => {
@@ -14,12 +15,8 @@ const Saved = () => {
     return <div>No projects yet</div>;
   }
 
-  return projects.map(({ project: { id, title, description, status } }) => (
-    <div key={id}>
-      <h3>{title}</h3>
-      <p>{description}</p>
-      <span>{status}</span>
-    </div>
+  return projects.map(({ project }) => (
+    <ProjectCard key={project.id} project={project as Projects} />
   ));
 };
 export default Saved;

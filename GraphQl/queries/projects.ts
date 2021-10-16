@@ -6,6 +6,16 @@ export const PROJECTS = gql`
       id
       title
       description
+      published_at
+      technologies {
+        title
+        image {
+          url
+        }
+      }
+      image {
+        url
+      }
     }
   }
 `;

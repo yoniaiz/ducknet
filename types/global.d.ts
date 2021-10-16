@@ -3,14 +3,6 @@ interface Image {
   name: string;
 }
 
-interface Project {
-  id: string;
-  title: string;
-  description: string;
-  image: Image;
-  status?: 'inProgress' | 'completed' | 'saved';
-}
-
 interface User {
   username: string;
   email: string;

@@ -1,4 +1,5 @@
 import { useQuery } from '@apollo/client';
+import ProjectCard from '@components/projectCard';
 import { PROJECTS_IN_PROGRESS } from 'GraphQl/queries/user';
 
 const Projects = () => {
@@ -14,14 +15,11 @@ const Projects = () => {
   if (!projects.length) {
     return <div>No projects yet</div>;
   }
-
+  console.log({ projects });
   return (
     <>
-      {projects.map(({ project: { id, title, description } }) => (
-        <div key={id}>
-          <h3>{title}</h3>
-          <p>{description}</p>
-        </div>
+      {projects.map(({ project }) => (
+        <ProjectCard key={project.id} project={project as Projects} />
       ))}
     </>
   );
