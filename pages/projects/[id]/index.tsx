@@ -10,7 +10,7 @@ const Project = ({ project }: { project: Projects; id: string }) => {
   if (router.isFallback) return <div>Loading</div>;
   if (!project) return <div>Not found</div>;
 
-  return <div>{JSON.stringify(project, null, 2)}</div>;
+  return <pre>{JSON.stringify(project, null, 2)}</pre>;
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {

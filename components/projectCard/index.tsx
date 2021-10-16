@@ -7,9 +7,11 @@ interface Props<T extends Projects> {
 
 const ProjectCard = <T extends Projects>({ project }: Props<T>) => {
   return (
-    <div role="card">
+    <div role="card" data-testid={`card--${project.title}`}>
       <Link href={`${routes.projects}/${project.id}`} passHref>
-        <h2 style={{ cursor: 'pointer' }}>{project.title}</h2>
+        <a data-testid={`link--${project.title}`}>
+          <h2 style={{ cursor: 'pointer' }}>{project.title}</h2>
+        </a>
       </Link>
       <p>{project.description}</p>
     </div>

@@ -1,18 +1,39 @@
-import { PROJECTS } from 'GraphQl/queries/projects';
+import { PROJECTS } from '@queries/projects';
 import { GetStaticProps } from 'next';
 import { useQuery } from '@apollo/client';
 import { initializeApollo } from '@hooks/useApollo';
 import ProjectCard from '@components/projectCard';
+import Checkbox from '@material-ui/core/Checkbox';
+import { FormControlLabel } from '@material-ui/core';
+import React from 'react';
 
 const FindProjects = () => {
-  const { data } = useQuery<{ projects: Projects[] }>(PROJECTS);
-
+  const { data, loading } = useQuery<{ projects: Projects[] }>(PROJECTS);
   const allProjects = data?.projects;
 
-  if (allProjects?.length) {
-    return allProjects.map((project) => <ProjectCard key={project.id} project={project} />);
+  if (loading) {
+    return (
+      <>
+        {React.Children.map([1, 2, 3], () => (
+          <div>skeleton</div>
+        ))}
+      </>
+    );
   }
-  return null;
+
+  if (allProjects?.length) {
+    return (
+      <>
+        <FormControlLabel control={<Checkbox id="role" />} label="Role" htmlFor="role" />
+
+        {allProjects.map((project) => (
+          <ProjectCard key={project.id} project={project} />
+        ))}
+      </>
+    );
+  }
+
+  return <div>No available projects</div>;
 };
 
 export const getStaticProps: GetStaticProps = async () => {

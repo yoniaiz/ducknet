@@ -5,6 +5,6 @@ module.exports = {
   ...require('./jest-common'),
   testEnvironment: 'node',
   coverageDirectory: path.join(__dirname, '../coverage/server'),
-  testMatch: ['**/__server__tests__/**/*.{js,ts}'],
+  testMatch: ['**/__server__tests__/**/*.{js,ts}', '**/*.steps.ts'],
   setupFilesAfterEnv: ['<rootDir>/test/jest.setup.server.js'],
 };

@@ -33,6 +33,8 @@ module.exports = {
     '^@components/(.*)$': '<rootDir>/components/$1',
     '^@icons': '<rootDir>/components/icons',
     '^@hooks/(.*)$': '<rootDir>/hooks/$1',
+    '^@queries/(.*)$': '<rootDir>/GraphQl/queries/$1',
+    '^@mutations/(.*)$': '<rootDir>/GraphQl/mutations/$1',
   },
   testPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/.next/'],
   transform: {

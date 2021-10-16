@@ -10,6 +10,7 @@
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended"
   ],
+  "ignorePatterns": "test/*.js",
   "rules": {
     "no-undef": "off",
     "no-unused-vars": "off",

@@ -35,7 +35,8 @@
       "@icons": ["components/icons"],
       "@constants/*": ["constants/*"],
       "@hooks/*": ["hooks/*"],
-      "@db/*": ["db/*"]
+      "@queries/*": ["GraphQl/queries/*"],
+      "@mutations/*": ["GraphQl/mutations/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "./test/jest.setup.ts"],
