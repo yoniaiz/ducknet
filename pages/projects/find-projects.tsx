@@ -2,6 +2,7 @@ import { PROJECTS } from 'GraphQl/queries/projects';
 import { GetStaticProps } from 'next';
 import { useQuery } from '@apollo/client';
 import { initializeApollo } from '@hooks/useApollo';
+import ProjectCard from '@components/projectCard';
 
 const FindProjects = () => {
   const { data } = useQuery<{ projects: Projects[] }>(PROJECTS);
@@ -9,13 +10,7 @@ const FindProjects = () => {
   const allProjects = data?.projects;
 
   if (allProjects?.length) {
-    return allProjects.map((project) => (
-      <div key={project.id}>
-        <h3>{project.title}</h3>
-        <p>{project.description}</p>
-        <span>{project.status}</span>
-      </div>
-    ));
+    return allProjects.map((project) => <ProjectCard key={project.id} project={project} />);
   }
   return null;
 };
