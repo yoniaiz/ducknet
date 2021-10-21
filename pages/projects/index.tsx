@@ -5,7 +5,7 @@ import { PROJECTS_IN_PROGRESS } from 'GraphQl/queries/user';
 const Projects = () => {
   const { data, loading } =
     useQuery<{ me: { projectsInProgress: ProjectInProgress[] } }>(PROJECTS_IN_PROGRESS);
-
+  console.log(data);
   const projects = data?.me.projectsInProgress || [];
 
   if (loading) {
@@ -15,7 +15,7 @@ const Projects = () => {
   if (!projects.length) {
     return <div>No projects yet</div>;
   }
-  console.log({ projects });
+
   return (
     <>
       {projects.map(({ project }) => (
