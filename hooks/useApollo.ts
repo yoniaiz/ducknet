@@ -49,7 +49,16 @@ function createApolloClient() {
   return new ApolloClient({
     ssrMode: typeof window === 'undefined',
     link: createIsomorphicLink(),
-    cache: new InMemoryCache(),
+    cache: new InMemoryCache({
+      typePolicies: {
+        Projects: {
+          keyFields: (store) => {
+            const id = store.id;
+            return `Project:${id}`;
+          },
+        },
+      },
+    }),
   });
 }
 

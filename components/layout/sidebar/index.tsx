@@ -1,23 +1,27 @@
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { useGetSideBarItems, Route } from './hooks/useGetSideBarItems';
 import * as S from './sidebar.style';
 
 const SideBar = () => {
+  const { asPath } = useRouter();
+  const { links, elements } = useGetSideBarItems();
+  const [, , uniqueId] = asPath.split('/');
+
+  const getLink = ({ route, title }: Route) => {
+    const path = typeof route === 'function' ? route(uniqueId) : route;
+
+    return (
+      <S.LinkWrapper $selected={asPath === path} key={title}>
+        <Link href={path}>{title}</Link>
+      </S.LinkWrapper>
+    );
+  };
+
   return (
     <S.SideBar>
-      <ul>
-        <li>
-          <Link href="/projects">my projects</Link>
-        </li>
-        <li>
-          <Link href="/projects/find-projects">find projects</Link>
-        </li>
-        <li>
-          <Link href="/projects/saved">saved projects</Link>
-        </li>
-        <li>
-          <Link href="/projects/completed">completed projects</Link>
-        </li>
-      </ul>
+      <S.LinksContainer>{links.map(getLink)}</S.LinksContainer>
+      {elements.map((item) => item)}
     </S.SideBar>
   );
 };
