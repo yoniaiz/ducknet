@@ -22,7 +22,6 @@ export const LinkWrapper = styled.li<{ $selected: boolean }>`
   z-index: 2;
   padding-left: 1.6rem;
   text-decoration: none;
-
   width: 100%;
 
   ::after {
@@ -39,6 +38,7 @@ export const LinkWrapper = styled.li<{ $selected: boolean }>`
 
   a {
     text-decoration: none;
+    text-transform: capitalize;
     width: 100%;
     color: ${({ theme }) => theme.colors.black};
     transition: color 0.3s ease-in;
