@@ -1,8 +1,12 @@
 import { useRouter } from 'next/router';
+import FindProjectFilters from '../components/FindProjectFilters/FindProjectFilters';
 
 export type Route = {
   route: string | ((id: string) => string);
   title: string;
+  isSelected?: boolean;
+  sideBarElement?: JSX.Element;
+  href?: string;
 };
 
 type PathRoutes = Route[];
@@ -17,6 +21,7 @@ const projects: PathRoutes = [
   {
     route: '/projects/find-projects',
     title: 'find projects',
+    sideBarElement: <FindProjectFilters />,
   },
   {
     route: '/projects/saved',
@@ -28,28 +33,44 @@ const projects: PathRoutes = [
   },
 ];
 
+const projectsId: PathRoutes = [
+  { route: (id: string) => `/projects/${id}`, title: 'project' },
+  { route: (id: string) => `/projects/${id}/get-started`, title: 'Get started' },
+  { route: (id: string) => `/projects/${id}/reviews`, title: 'Reviews' },
+  { route: (id: string) => `/projects/${id}/solutions`, title: 'Solutions' },
+];
+
 const sidebarItemsLinks: SideBarItemsLinks = {
   projects,
-  'projects[id]': [{ route: (id: string) => `/projects/${id}`, title: 'project' }],
+  'projects[id]': projectsId,
 };
 
 type MainRouteKeys = keyof typeof sidebarItemsLinks;
-type SideBarItemsElements = Record<Partial<MainRouteKeys>, JSX.Element[]>;
-
-const sidebarItemsElements: SideBarItemsElements = {
-  projects: [<div key="hi">hi</div>],
-};
 
 const ID_REGEX = /^\[.+\]$/;
 
 export const useGetSideBarItems = () => {
-  const { pathname } = useRouter();
+  const { pathname, asPath } = useRouter();
 
   const [, mainRoute, id] = pathname.split('/');
   const itemsKey = (ID_REGEX.test(id) ? `${mainRoute}${id}` : mainRoute) as MainRouteKeys;
 
   const routeItemsLinks = sidebarItemsLinks[itemsKey] || [];
-  const routeItemsElements = sidebarItemsElements[itemsKey] || [];
 
-  return { elements: routeItemsElements, links: routeItemsLinks };
+  const [, , uniqueId] = asPath.split('/');
+
+  let Element: JSX.Element | null = null;
+
+  routeItemsLinks.forEach((link, idx) => {
+    const href = typeof link.route === 'function' ? link.route(uniqueId) : link.route;
+    const isSelected = href === asPath;
+    routeItemsLinks[idx].isSelected = isSelected;
+    routeItemsLinks[idx].href = href;
+
+    if (isSelected) {
+      Element = link.sideBarElement || null;
+    }
+  });
+
+  return { links: routeItemsLinks, Element };
 };

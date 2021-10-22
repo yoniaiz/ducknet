@@ -4,8 +4,10 @@ import { PROJECTS } from '@queries/projects';
 import { useQuery } from '@apollo/client';
 import { initializeApollo } from '@hooks/useApollo';
 import ProjectCard from '@components/projectCard';
+import useStore from '@store';
 
 const FindProjects = () => {
+  const filters = useStore((state) => state.filters);
   const { data, loading } = useQuery<{ projects: Projects[] }>(PROJECTS);
   const allProjects = data?.projects;
 
@@ -22,6 +24,7 @@ const FindProjects = () => {
   if (allProjects?.length) {
     return (
       <>
+        <pre>{JSON.stringify(filters, null, 2)}</pre>
         {allProjects.map((project) => (
           <ProjectCard key={project.id} project={project} />
         ))}

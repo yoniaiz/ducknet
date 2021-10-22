@@ -1,31 +1,22 @@
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import { useGetSideBarItems, Route } from './hooks/useGetSideBarItems';
 import * as S from './sidebar.style';
 
 const SideBar = () => {
-  const { asPath } = useRouter();
-  const { links, elements } = useGetSideBarItems();
-  const [, , uniqueId] = asPath.split('/');
+  const { links, Element } = useGetSideBarItems();
 
-  const getLink = ({ route, title }: Route) => {
-    const path = typeof route === 'function' ? route(uniqueId) : route;
-
+  const getLink = ({ href, title, isSelected }: Route) => {
     return (
-      <S.LinkWrapper $selected={asPath === path} key={title}>
-        <Link href={path}>{title}</Link>
+      <S.LinkWrapper $selected={isSelected || false} key={title}>
+        <Link href={href || ''}>{title}</Link>
       </S.LinkWrapper>
     );
   };
 
-  if (!links.length && !elements.length) {
-    return null;
-  }
-
   return (
     <S.SideBar>
       <S.LinksContainer>{links.map(getLink)}</S.LinksContainer>
-      {elements.map((item) => item)}
+      {Element}
     </S.SideBar>
   );
 };
