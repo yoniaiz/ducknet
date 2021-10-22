@@ -18,6 +18,10 @@ const SideBar = () => {
     );
   };
 
+  if (!links.length && !elements.length) {
+    return null;
+  }
+
   return (
     <S.SideBar>
       <S.LinksContainer>{links.map(getLink)}</S.LinksContainer>

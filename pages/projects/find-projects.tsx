@@ -1,11 +1,9 @@
-import { PROJECTS } from '@queries/projects';
+import { Children } from 'react';
 import { GetStaticProps } from 'next';
+import { PROJECTS } from '@queries/projects';
 import { useQuery } from '@apollo/client';
 import { initializeApollo } from '@hooks/useApollo';
 import ProjectCard from '@components/projectCard';
-import Checkbox from '@material-ui/core/Checkbox';
-import { FormControlLabel } from '@material-ui/core';
-import React from 'react';
 
 const FindProjects = () => {
   const { data, loading } = useQuery<{ projects: Projects[] }>(PROJECTS);
@@ -14,7 +12,7 @@ const FindProjects = () => {
   if (loading) {
     return (
       <>
-        {React.Children.map([1, 2, 3], () => (
+        {Children.map([1, 2, 3], () => (
           <div>skeleton</div>
         ))}
       </>
@@ -24,8 +22,6 @@ const FindProjects = () => {
   if (allProjects?.length) {
     return (
       <>
-        <FormControlLabel control={<Checkbox id="role" />} label="Role" htmlFor="role" />
-
         {allProjects.map((project) => (
           <ProjectCard key={project.id} project={project} />
         ))}
