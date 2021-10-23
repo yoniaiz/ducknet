@@ -1,6 +1,6 @@
-import Checkbox from '@material-ui/core/Checkbox';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import useStore from 'store';
+import Checkbox from '@ui/Checkbox';
+import FiltersContainer from './components/FiltersContainer';
 
 const rolesFilters = [
   { name: 'Front-end', value: 'frontend' },
@@ -51,50 +51,39 @@ const FindProjectFilters = () => {
 
   return (
     <>
-      <div style={{ display: 'flex', flexDirection: 'column' }}>
+      <FiltersContainer label="Roles">
         {rolesFilters.map((roleFilter) => (
-          <FormControlLabel
+          <Checkbox
             key={roleFilter.value}
-            control={
-              <Checkbox
-                onChange={() => {
-                  if (filters[roleFilter.value]) {
-                    removeFilter([
-                      roleFilter.value,
-                      ...techs[roleFilter.value as keyof typeof techs].map((item) => item.value),
-                    ]);
-                  } else {
-                    toggleFilter(roleFilter.value);
-                  }
-                }}
-                checked={!!filters[roleFilter.value]}
-                value={roleFilter.value}
-                id={roleFilter.value}
-              />
-            }
+            checked={!!filters[roleFilter.value]}
+            value={roleFilter.value}
             label={roleFilter.name}
-            htmlFor={roleFilter.value}
+            onChange={() => {
+              if (filters[roleFilter.value]) {
+                removeFilter([
+                  roleFilter.value,
+                  ...techs[roleFilter.value as keyof typeof techs].map((item) => item.value),
+                ]);
+              } else {
+                toggleFilter(roleFilter.value);
+              }
+            }}
           />
         ))}
-      </div>
-      <br />
-      <div style={{ display: 'flex', flexDirection: 'column' }}>
-        {techsFilters.map((techsFilter) => (
-          <FormControlLabel
-            key={techsFilter.value}
-            control={
-              <Checkbox
-                onChange={(e) => toggleFilter(e.target.value)}
-                checked={!!filters[techsFilter.value]}
-                value={techsFilter.value}
-                id={techsFilter.value}
-              />
-            }
-            label={techsFilter.name}
-            htmlFor={techsFilter.value}
-          />
-        ))}
-      </div>
+      </FiltersContainer>
+      {!!techsFilters?.length && (
+        <FiltersContainer label="Technologies">
+          {techsFilters.map((techsFilter) => (
+            <Checkbox
+              key={techsFilter.value}
+              value={techsFilter.value}
+              label={techsFilter.name}
+              onChange={(e) => toggleFilter(e?.target?.value || '')}
+              checked={!!filters[techsFilter.value]}
+            />
+          ))}
+        </FiltersContainer>
+      )}
     </>
   );
 };
